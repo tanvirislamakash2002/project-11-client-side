@@ -1,10 +1,10 @@
-import React, { use } from 'react';
-import { Link, Links, NavLink } from 'react-router';
-import { AuthContext } from '../provider/AuthContext';
+
+import { Link, NavLink } from 'react-router';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
-    const { user, signOutUser } = use(AuthContext)
+    const { user, signOutUser } = useAuth()
 
     const handleSignOut = () => {
         signOutUser()
@@ -57,11 +57,11 @@ const Navbar = () => {
                         <div className="bg-base-100 shadow-sm">
                             <div className="flex gap-2">
                                 <div className="dropdown dropdown-end">
-                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-10 rounded-full">
+                                    <div tabIndex={0} role="button" className="avatar">
+                                        <div className="w-15 rounded-full">
                                             <img
                                                 alt="Tailwind CSS Navbar component"
-                                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                                src={user.photoURL&&user.photoURL} />
                                         </div>
                                     </div>
                                     <ul

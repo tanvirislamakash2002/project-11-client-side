@@ -1,9 +1,9 @@
-import React, { use } from 'react';
-import { AuthContext } from '../provider/AuthContext';
+
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const Register = () => {
-    const { createUser, updateUser, setUser } = use(AuthContext)
+    const { createUser, updateUser, setUser } = useAuth()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -12,18 +12,18 @@ const Register = () => {
         const data = Object.fromEntries(formData.entries())
         const { name, email, photo, password } = data
 
-        if(password.length<=5){
-            alert('password must be more then 6 character');
-            return
-        }
-        else if(!/[A-Z]/.test(password)){
-            alert('password must contain an Uppercase latter');
-            return
-        }
-        else if(!/[a-z]/.test(password)){
-            alert('password must contain an lowercase latter');
-            return
-        }
+        // if(password.length<=5){
+        //     alert('password must be more then 6 character');
+        //     return
+        // }
+        // else if(!/[A-Z]/.test(password)){
+        //     alert('password must contain an Uppercase latter');
+        //     return
+        // }
+        // else if(!/[a-z]/.test(password)){
+        //     alert('password must contain an lowercase latter');
+        //     return
+        // }
 
         createUser(email, password)
             .then(userCredential => {

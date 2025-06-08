@@ -1,9 +1,9 @@
-import React, { use } from 'react';
-import { AuthContext } from '../provider/AuthContext';
+
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
-    const { signInWithGoogle, loginUser } = use(AuthContext)
+    const { signInWithGoogle, loginUser } = useAuth()
 
     // signin with google
     const handleSignInWithGoogle = () => {
