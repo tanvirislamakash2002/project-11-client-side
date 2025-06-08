@@ -8,6 +8,8 @@ import PostArticle from "../pages/PostArticle";
 import MyArticles from "../pages/MyArticles";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import axios from "axios";
+import ArticleDetails from "../pages/ArticleDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,15 @@ const router = createBrowserRouter([
         },
         {
             path:'/allArticles',
+            loader:()=>axios(`${import.meta.env.VITE_API_URL}/all-articles`),
+            hydrateFallbackElement:<h2>fall back</h2>,
             element:<AllArticles></AllArticles>
+        },
+        {
+            path:'/articleDetails/:id',
+            loader:({params})=>axios(`${import.meta.env.VITE_API_URL}/all-articles/${params.id}`),
+            hydrateFallbackElement:<h2>fall back</h2>,
+            element:<ArticleDetails></ArticleDetails>
         },
         {
             path:'/postArticle',

@@ -1,6 +1,7 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const PostArticle = () => {
     const { user } = useAuth()
@@ -19,10 +20,13 @@ const PostArticle = () => {
 
         axios.post(`${import.meta.env.VITE_API_URL}/post-article`, newPost)
         .then(data=>{
-            console.log('data form axios',data)
+            // console.log('data form axios',data)
+            toast.success("Your Article Posted Successfully!");
         })
         .catch(error=>{
-            console.log(error)
+            console.log(error);
+            toast.error("Failed to add post!");
+
         })
     }
     return (
