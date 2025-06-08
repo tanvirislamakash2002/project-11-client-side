@@ -2,8 +2,8 @@ import React from 'react';
 
 const PostArticle = () => {
     return (
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">Login</legend>
+        <fieldset className="mx-auto fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
             <label className="label">Email</label>
             <input type="email" className="input" placeholder="Email" />

@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, Links, NavLink } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
 import Swal from 'sweetalert2';
 
@@ -10,7 +10,7 @@ const Navbar = () => {
         signOutUser()
             .then(() => {
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Your work has been saved",
                     showConfirmButton: false,
@@ -67,8 +67,8 @@ const Navbar = () => {
                                     <ul
                                         tabIndex={0}
                                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                        <li><a>Profile</a></li>
-                                        <li><a>Settings</a></li>
+                                        <li><Link to='myArticles'>My Articles</Link></li>
+                                        <li><Link to='postArticle'>Post Article</Link></li>
                                         <li onClick={handleSignOut} className='font-bold text-red-400'><a>Logout</a></li>
                                     </ul>
                                 </div>
