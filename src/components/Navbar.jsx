@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router';
 
 const Navbar = () => {
     const links = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 1</a></li>
-        <li><a>Item 1</a></li>
+        <li><NavLink to={'/'} className={({isActive})=>isActive?'text-red-400':'text-green-500'}>Home</NavLink></li>
+        <li><NavLink to={'/allArticles'} className={({isActive})=>isActive?'text-red-400':'text-green-500'}>All Articles</NavLink></li>
+        <li><NavLink to={'/postArticle'} className={({isActive})=>isActive?'text-red-400':'text-green-500'}>Post Article</NavLink></li>
+        <li><NavLink to={'/myArticles'} className={({isActive})=>isActive?'text-red-400':'text-green-500'}>My Articles</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -29,7 +31,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <Link to='/login' className='btn'>Login</Link>
+                <Link to='/register' className='btn'>Register</Link>
             </div>
         </div>
     );
