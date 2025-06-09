@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import MyArticleRow from '../components/MyArticleRow';
 import UpdateModal from '../components/UpdateModal';
@@ -10,7 +10,11 @@ const MyArticles = () => {
     const [selectedArticle, setSelectedArticle] = useState({})
 
 
-
+    const removeDataFromTable = (id) => {
+        const filterData = articles.filter(article => article._id !== id)
+        console.log('what a data', filterData)
+        setArticles(filterData)
+    }
     const handleEdit = (articleData) => {
         setSelectedArticle(articleData)
         document.getElementById('my_modal_3').showModal()
@@ -18,17 +22,12 @@ const MyArticles = () => {
     }
     // console.log(selectedArticle)
 
-    //     setArticles(articles.map(article=>
-    //     article._id===selectedArticle._id?selectedArticle:article
-    // ))
-
-
     const handleRowUpdate = (updatedData) => {
-        console.log(updatedData)
+        // console.log(updatedData)
         setArticles(articles.map(article =>
             article._id === updatedData._id ? updatedData : article
         ))
-        setSelectedArticle({})
+        // setSelectedArticle({})
     }
 
 
@@ -39,17 +38,18 @@ const MyArticles = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
-                        <th>Favorite Color</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {/* rows */}
                     {
                         articles.map((myData, index) =>
-                            <MyArticleRow key={myData._id} myData={myData} index={index} handleEdit={handleEdit} ></MyArticleRow>
+                            <MyArticleRow key={myData._id} myData={myData} index={index} handleEdit={handleEdit} removeDataFromTable={removeDataFromTable}></MyArticleRow>
                         )
                     }
 

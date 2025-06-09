@@ -3,17 +3,33 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) => {
-    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = selectedArticle 
-    const [selectedCategory, setSelectedCategory] = useState(category||'')
-    useEffect(()=>{
-        setSelectedCategory(category||'')
-    },[category])
+    // const [updateData, setUpdateData] = useState(selectedArticle)
+    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = selectedArticle
 
-    const {multi1:multi1Value='',multi2:multi2Value=''}=tags||{}
-    // setSelectedArticle(selectedArticle)
-    //console.log(category,tags)
     // console.log(selectedArticle)
+    const [selectedCategory, setSelectedCategory] = useState(category || '')
+    useEffect(() => {
+        setSelectedCategory(category || '')
+    }, [category])
 
+    const { multi1: multi1Value = '', multi2: multi2Value = '' } = tags || {}
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setSelectedArticle({ ...selectedArticle, [name]: value })
+    }
+
+    const handleTagsChange = (e)=>{
+        const{name, value} =e.target;
+        setSelectedArticle({
+            ...selectedArticle,
+            tags:{
+                ...selectedArticle.tags,
+                [name]: value
+            }
+        })
+    }
+    // edit method 
     const handleEditArticle = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -26,13 +42,15 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
         newPost.tags = { multi1, multi2 }
         // console.log(newPost)
 
+
         axios.put(`${import.meta.env.VITE_API_URL}/edit-my-article/${_id}`, newPost)
             .then(data => {
                 // console.log('data form axios',_id)
                 toast.success("Your Article Posted Successfully!");
-                newPost._id=_id 
+                newPost._id = _id
                 setSelectedArticle(newPost)
                 handleRowUpdate(newPost)
+                // setUpdateData(selectedArticle)
             })
             .catch(error => {
                 console.log(error);
@@ -58,15 +76,14 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                         <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
                         <label className="label">Title</label>
-                        <input name='title' defaultValue={title} type="text" className="input" placeholder="Give a title" />
+                        <input name='title' value={title} type="text" className="input" placeholder="Give a title" onChange={handleChange} />
 
                         <label className="label">Content </label>
-                        <textarea name='content' defaultValue={content} className="textarea" placeholder="Content "></textarea>
+                        <textarea name='content' value={content} className="textarea" placeholder="Content " onChange={handleChange}></textarea>
 
                         <label className="label">Category</label>
-                        
-                        <select name='category' value={selectedCategory} onChange={(e)=>setSelectedCategory(e.target.value)} className="select">
-                            {/* {console.log(category)} */}
+
+                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="select">
                             <option disabled={true}>Pick a color</option>
                             <option value='gulistan'>gulistan</option>
                             <option value='pakistan'>pakistan</option>
@@ -77,22 +94,27 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
 
                         <label className="label">Tags</label>
                         <div className="flex">
-                            <select name='multi1' defaultValue={multi1Value} className="select">
+                            <select name='multi1' value={multi1Value} onChange={handleTagsChange} className="select">
                                 <option disabled>Pick a color</option>
                                 <option value='tanvir'>tanvir</option>
                                 <option value='islam'>islam</option>
                                 <option value='akash'>akash</option>
+                                <option value='siddik'>siddik</option>
+                                <option value='amir'>amir</option>
                             </select>
-                            <select name='multi2'  defaultValue={multi2Value} className="select">
+                            <select name='multi2' value={multi2Value} onChange={handleTagsChange} className="select">
                                 <option disabled={true}>Pick a color</option>
                                 <option value='what'>what</option>
                                 <option value='the'>the</option>
                                 <option value='fish'>fish</option>
+                                <option value='shirk'>shirk</option>
+                                <option value='abraham'>abraham</option>
                             </select>
                         </div>
 
                         <label className="label">Thumbnail image</label>
-                        <input name='thumbnail' defaultValue={thumbnail} type="text" className="input" placeholder="Thumbnail image" />
+                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />
+                        {/* {console.log('this is it',thumbnail)} */}
 
                         <label className="label">Date</label>
                         <input name='date' defaultValue={date} type="date" className="input" placeholder="" />

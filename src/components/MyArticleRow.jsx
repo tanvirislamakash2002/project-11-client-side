@@ -2,9 +2,9 @@ import axios from 'axios';
 import React from 'react';
 import Swal from 'sweetalert2';
 
-const MyArticleRow = ({ myData, index, handleEdit }) => {
+const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = myData;
-//console.log(selectedArticle)
+    //console.log(selectedArticle)
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -19,7 +19,8 @@ const MyArticleRow = ({ myData, index, handleEdit }) => {
                 axios.delete(`${import.meta.env.VITE_API_URL}/dlt-my-article/${id}`)
                     .then(data => {
                         console.log(data.data)
-                        if(data.data.deletedCount>0){
+                        if (data.data.deletedCount > 0) {
+                            removeDataFromTable(_id)
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
@@ -36,8 +37,9 @@ const MyArticleRow = ({ myData, index, handleEdit }) => {
     return (
         <tr>
             <th>{index + 1}</th>
-            <td>{category}</td>
+            <td>{title}</td>
             <td>{content}</td>
+            <td>{category}</td>
             <td>{date}</td>
             <td>
                 <button className='btn btn-accent' onClick={() => handleEdit(myData)}>Edit</button>
