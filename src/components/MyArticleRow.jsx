@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const MyArticleRow = ({ myData, index, handleEdit }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = myData;
-
+//console.log(selectedArticle)
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
