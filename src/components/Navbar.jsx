@@ -26,8 +26,8 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>Home</NavLink></li>
         <li><NavLink to={'/allArticles'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>All Articles</NavLink></li>
-        <li><NavLink to={'/postArticle'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>Post Article</NavLink></li>
-        <li><NavLink to={'/myArticles'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>My Articles</NavLink></li>
+        {/* <li><NavLink to={'/postArticle'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>Post Article</NavLink></li>
+        <li><NavLink to={'/myArticles'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>My Articles</NavLink></li> */}
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -67,7 +67,7 @@ const Navbar = () => {
                                     <ul
                                         tabIndex={0}
                                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                        <li><Link to='myArticles'>My Articles</Link></li>
+                                        <li><Link to={`myArticles/${user.email}`}>My Articles</Link></li>
                                         <li><Link to='postArticle'>Post Article</Link></li>
                                         <li onClick={handleSignOut} className='font-bold text-red-400'><a>Logout</a></li>
                                     </ul>

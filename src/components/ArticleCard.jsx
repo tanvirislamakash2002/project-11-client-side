@@ -12,8 +12,9 @@ const ArticleCard = ({ articleData }) => {
                     className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
-                <h2 className="card-title">Card Title</h2>
-                <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                <h2 className="card-title">{title}</h2>
+                <p>{content}</p>
+                <p>{category}</p>
                 <div className="card-actions">
                     <Link to={`/articleDetails/${_id}`}>
                         <button className="btn btn-primary">Buy Now</button>
