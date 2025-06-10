@@ -3,12 +3,14 @@ import { useLoaderData, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const ArticleDetails = () => {
     const navigate = useNavigate()
     const { user } = useAuth()
     const { data } = useLoaderData()
     const [article, setArticle] = useState(data)
+    const [comments, setComments] = useState([])
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title, likedBy = [] } = article || {}
     const { multi1, multi2 } = tags
 
@@ -46,11 +48,39 @@ const ArticleDetails = () => {
     }
 
     // handle comment article 
-    const handleComment=(e)=>{
+    const handleComment = (e) => {
         e.preventDefault()
         const comment = e.target.comment.value;
-        console.log(comment)
+        const commentData = { article_id: _id, commenter_name: user?.displayName, commenter_photo: user?.photoURL, comment }
+        console.log(commentData)
+        axios.post(`${import.meta.env.VITE_API_URL}/comment-article`, commentData)
+        .then(data => {
+            setComments([...comments, commentData]) 
+                // console.log('data form axios',data)
+                toast.success("Comment added Successfully!");
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error("Failed to comment!");
+
+            })
     }
+
+    
+
+    useEffect(() => {
+        try {
+            axios.get(`${import.meta.env.VITE_API_URL}/article-comments/${_id}`)
+                .then(res => {
+
+                    setComments(res.data)
+                })
+        } catch (error) {
+            console.log(error)
+        }
+
+    }, [_id])
+    console.log(comments)
     return (
         <div className="card w-96 bg-base-100 shadow-sm">
             <div className="card-body">
@@ -87,24 +117,20 @@ const ArticleDetails = () => {
                     </div>
                 </form>
             </div>
-            <div className="card card-dash bg-base-100 w-96">
-                <div className="card-body">
-                    <h2 className="card-title">Card Title</h2>
-                    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+            {
+                comments.map(comment => <div key={comment._id} className="card card-dash bg-base-100 w-96">
+                    <div className="card-body">
+                        <div className="avatar">
+                            <div className="mask mask-squircle w-24">
+                                <img src={comment.commenter_photo} />
+                            </div>
+                        </div>
+                        <p>{comment.commenter_name}</p>
+                        <p>{comment.comment}</p>
                     </div>
-                </div>
-            </div>
-            <div className="card card-dash bg-base-100 w-96">
-                <div className="card-body">
-                    <h2 className="card-title">Card Title</h2>
-                    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                    </div>
-                </div>
-            </div>
+                </div>)
+            }
+
         </div>
     );
 };
