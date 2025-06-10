@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const ArticleDetails = () => {
+    const navigate = useNavigate()
     const { user } = useAuth()
     const { data } = useLoaderData()
     const [article, setArticle] = useState(data)
-    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title, likedBy } = article || {}
+    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title, likedBy = [] } = article || {}
     const { multi1, multi2 } = tags
 
     // handle like and dislike
@@ -24,19 +25,31 @@ const ArticleDetails = () => {
             return Swal.fire({ title: 'you cannot like your own post', icon: 'error' })
         }
 
-        axios.patch(`${import.meta.env.VITE_API_URL}/like/${_id}`, {
-            authorEmail: user?.email
-        })
-            .then(data => {
-                console.log(data?.data)
-                const isLiked = data?.data?.liked
-                setLiked(isLiked)
-                setLikeCount(prev => (isLiked ? prev + 1 : prev - 1))
+        if (user) {
+            axios.patch(`${import.meta.env.VITE_API_URL}/like/${_id}`, {
+                authorEmail: user?.email
             })
-            .catch(error => {
-                console.log(error)
-            })
-        Swal.fire({ title: 'you cannot like your own post', icon: 'success' })
+                .then(data => {
+                    console.log(data?.data)
+                    const isLiked = data?.data?.liked
+                    setLiked(isLiked)
+                    setLikeCount(prev => (isLiked ? prev + 1 : prev - 1))
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            Swal.fire({ title: 'You have liked the post', icon: 'success' })
+        }
+        else {
+            return navigate('/login')
+        }
+    }
+
+    // handle comment article 
+    const handleComment=(e)=>{
+        e.preventDefault()
+        const comment = e.target.comment.value;
+        console.log(comment)
     }
     return (
         <div className="card w-96 bg-base-100 shadow-sm">
@@ -65,7 +78,31 @@ const ArticleDetails = () => {
 
                 </ul>
                 <div className="mt-6">
-                    <button className="btn btn-primary btn-block" onClick={handleLike}>{liked?`Dislike`:`Like`}</button>
+                    <button className="btn btn-primary btn-block" onClick={handleLike}>{liked ? `Dislike` : `Like`}</button>
+                </div>
+                <form onSubmit={handleComment}>
+                    <textarea name='comment' className="textarea w-full" placeholder="Bio"></textarea>
+                    <div className="flex justify-end">
+                        <input type="submit" value="post" className='btn btn-success' />
+                    </div>
+                </form>
+            </div>
+            <div className="card card-dash bg-base-100 w-96">
+                <div className="card-body">
+                    <h2 className="card-title">Card Title</h2>
+                    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div className="card card-dash bg-base-100 w-96">
+                <div className="card-body">
+                    <h2 className="card-title">Card Title</h2>
+                    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
                 </div>
             </div>
         </div>
