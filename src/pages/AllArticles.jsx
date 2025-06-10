@@ -4,7 +4,7 @@ import ArticleCard from '../components/ArticleCard';
 
 const AllArticles = () => {
     const {data} =  useLoaderData()
-    // console.log(data)
+    
     return (
 <div className='grid grid-cols-1 lg:grid-cols-3'>
 {

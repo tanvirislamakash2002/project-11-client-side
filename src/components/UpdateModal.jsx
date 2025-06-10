@@ -6,7 +6,6 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
     // const [updateData, setUpdateData] = useState(selectedArticle)
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = selectedArticle
 
-    // console.log(selectedArticle)
     const [selectedCategory, setSelectedCategory] = useState(category || '')
     useEffect(() => {
         setSelectedCategory(category || '')
@@ -40,12 +39,12 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
         // combining tags 
         const { multi1, multi2, ...newPost } = data
         newPost.tags = { multi1, multi2 }
-        // console.log(newPost)
+        
 
 
         axios.put(`${import.meta.env.VITE_API_URL}/edit-my-article/${_id}`, newPost)
             .then(data => {
-                // console.log('data form axios',_id)
+                
                 toast.success("Your Article Posted Successfully!");
                 newPost._id = _id
                 setSelectedArticle(newPost)
@@ -113,8 +112,7 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                         </div>
 
                         <label className="label">Thumbnail image</label>
-                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />
-                        {/* {console.log('this is it',thumbnail)} */}
+                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />                       
 
                         <label className="label">Date</label>
                         <input name='date' defaultValue={date} type="date" className="input" placeholder="" />

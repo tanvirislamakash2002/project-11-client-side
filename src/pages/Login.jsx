@@ -22,7 +22,7 @@ const Login = () => {
             })
     }
 
-    //login wi
+    //login with email and password
     const handleLogin = (e) => {
         e.preventDefault()
         const form = e.target;

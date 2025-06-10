@@ -20,10 +20,10 @@ const MyArticles = () => {
         document.getElementById('my_modal_3').showModal()
 
     }
-    // console.log(selectedArticle)
+    
 
     const handleRowUpdate = (updatedData) => {
-        // console.log(updatedData)
+        
         setArticles(articles.map(article =>
             article._id === updatedData._id ? updatedData : article
         ))
@@ -40,6 +40,7 @@ const MyArticles = () => {
                         <th></th>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Tags</th>
                         <th>Category</th>
                         <th>Date</th>
                         <th></th>

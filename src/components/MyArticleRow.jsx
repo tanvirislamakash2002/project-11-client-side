@@ -4,7 +4,8 @@ import Swal from 'sweetalert2';
 
 const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = myData;
-    //console.log(selectedArticle)
+    const {multi1, multi2} = tags
+    
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -39,6 +40,7 @@ const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
             <th>{index + 1}</th>
             <td>{title}</td>
             <td>{content}</td>
+            <td>{multi1}, {multi2}</td>
             <td>{category}</td>
             <td>{date}</td>
             <td>
