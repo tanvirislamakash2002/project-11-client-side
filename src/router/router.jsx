@@ -19,6 +19,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                loader: () => axios(`${import.meta.env.VITE_API_URL}/recent-articles`),
                 element: <Home></Home>
             },
             {

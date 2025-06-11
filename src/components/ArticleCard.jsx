@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const ArticleCard = ({ articleData }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = articleData
-    
+    console.log(articleData)
     return (
         <div className="card bg-base-100 w-96 shadow-sm">
             <figure className="px-10 pt-10">
