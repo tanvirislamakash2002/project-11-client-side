@@ -8,7 +8,7 @@ import CategorySection from '../components/CategorySection';
 const Home = () => {
     const { data } = useLoaderData()
     const [recentArticles, setRecentArticles] = useState(data)
-    console.log(recentArticles)
+    // console.log(recentArticles)
     return (
         <div>
             <h2 className="text-3xl text-green-500">This is home</h2>

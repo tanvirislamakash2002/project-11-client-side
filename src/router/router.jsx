@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import axios from "axios";
 import ArticleDetails from "../pages/ArticleDetails";
 import Loading from "../pages/Loading";
+import ArticlesFilterByCategory from "../pages/ArticlesFilterByCategory";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +44,12 @@ const router = createBrowserRouter([
                 loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <MyArticles></MyArticles>
+            },
+            {
+                path: '/filter-by-category/:category',
+                loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/filter-by-category/${params.category}`),
+                hydrateFallbackElement: <Loading></Loading>,
+                element: <ArticlesFilterByCategory></ArticlesFilterByCategory>
             },
             {
                 path: '/login',
