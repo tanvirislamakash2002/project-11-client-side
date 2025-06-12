@@ -44,7 +44,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myArticles/:email',
-                loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`),
+                loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`,{
+                    headers:{
+                        Authorization:`Bearer ${localStorage.getItem('token')}`
+                    }
+                }),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <PrivateRoute>
                     <MyArticles></MyArticles>
