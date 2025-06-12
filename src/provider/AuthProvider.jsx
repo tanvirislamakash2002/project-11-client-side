@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
     // signOut User
     const signOutUser = () => {
         setLoading(true)
+        localStorage.removeItem('token')
         return signOut(auth)
     }
 
@@ -43,14 +44,18 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             setLoading(false)
-            if(currentUser?.email){
-                const userData = {email:currentUser.email}
+            if (currentUser?.email) {
+                const userData = { email: currentUser.email }
                 axios.post(`${import.meta.env.VITE_API_URL}/jwt`, userData)
-                .then(res=>{
-                    const token = res.data.token;
-                    localStorage.setItem('token', token)
-                })
-                .catch(error=>console.log(error))
+                    .then(res => {
+                        const token = res.data.token;
+                        localStorage.setItem('token', token)
+                    })
+                    .catch(error => console.log(error))
+            }
+            else {
+                localStorage.removeItem('token')
+
             }
         })
         return () => {

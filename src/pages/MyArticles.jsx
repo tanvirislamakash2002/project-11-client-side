@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect, useState } from 'react';
+// import { useLoaderData } from 'react-router';
 import MyArticleRow from '../components/MyArticleRow';
 import UpdateModal from '../components/UpdateModal';
 import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyArticles = () => {
-    const { data } = useLoaderData()
+    // const { data } = useLoaderData()
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
 
-    const [articles, setArticles] = useState(data)
+    const [articles, setArticles] = useState([])
     const [selectedArticle, setSelectedArticle] = useState({})
+
+    useEffect(()=>{
+        axiosSecure(`/my-articles/${user.email}`)
+        .then(data=>{
+            setArticles(data?.data)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    },[axiosSecure, user])
 
 
     const removeDataFromTable = (id) => {

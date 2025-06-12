@@ -13,11 +13,14 @@ import ArticleDetails from "../pages/ArticleDetails";
 import Loading from "../pages/Loading";
 import ArticlesFilterByCategory from "../pages/ArticlesFilterByCategory";
 import PrivateRoute from "../provider/PrivateRoute";
+import ErrorPage from "../pages/ErrorPage";
+
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -44,11 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myArticles/:email',
-                loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`,{
-                    headers:{
-                        Authorization:`Bearer ${localStorage.getItem('token')}`
-                    }
-                }),
+                // loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`,{
+                //     headers:{
+                //         Authorization:`Bearer ${localStorage.getItem('token')}`
+                //     }
+                // }),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <PrivateRoute>
                     <MyArticles></MyArticles>
