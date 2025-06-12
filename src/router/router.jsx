@@ -12,6 +12,7 @@ import axios from "axios";
 import ArticleDetails from "../pages/ArticleDetails";
 import Loading from "../pages/Loading";
 import ArticlesFilterByCategory from "../pages/ArticlesFilterByCategory";
+import PrivateRoute from "../provider/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -37,13 +38,17 @@ const router = createBrowserRouter([
             },
             {
                 path: '/postArticle',
-                element: <PostArticle></PostArticle>
+                element: <PrivateRoute>
+                    <PostArticle></PostArticle>
+                </PrivateRoute>
             },
             {
                 path: '/myArticles/:email',
                 loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`),
                 hydrateFallbackElement: <Loading></Loading>,
-                element: <MyArticles></MyArticles>
+                element: <PrivateRoute>
+                    <MyArticles></MyArticles>
+                </PrivateRoute>
             },
             {
                 path: '/filter-by-category/:category',

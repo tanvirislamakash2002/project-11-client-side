@@ -4,7 +4,7 @@ import ArticleCard from '../components/ArticleCard';
 
 const ArticlesFilterByCategory = () => {
     const { data } = useLoaderData()
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             filtered article

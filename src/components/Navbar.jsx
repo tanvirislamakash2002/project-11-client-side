@@ -1,10 +1,13 @@
 
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
     const { user, signOutUser } = useAuth()
+    const location = useLocation();
+    const navigate = useNavigate()
+    const from = location.state || '/'
 
     const handleSignOut = () => {
         signOutUser()
@@ -16,6 +19,7 @@ const Navbar = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate(from)
             })
             .catch(error => {
                 console.log(error)
@@ -61,7 +65,7 @@ const Navbar = () => {
                                         <div className="w-15 rounded-full">
                                             <img
                                                 alt="Tailwind CSS Navbar component"
-                                                src={user.photoURL&&user.photoURL} />
+                                                src={user.photoURL && user.photoURL} />
                                         </div>
                                     </div>
                                     <ul
@@ -78,7 +82,7 @@ const Navbar = () => {
                     :
                     <>
                         <Link to='/login' className='btn'>Login</Link>
-                        <Link to='/register' className='btn'>Register</Link>
+                        <Link to='/register' state={location.state} className='btn'>Register</Link>
                     </>
                 }
             </div>

@@ -6,6 +6,7 @@ import { AuthContext } from './AuthContext';
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     // Register
     const createUser = (email, password) => {
@@ -36,6 +37,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            setLoading(false)
         })
         return () => {
             unSubscribe()
@@ -49,7 +51,8 @@ const AuthProvider = ({ children }) => {
         signInWithGoogle,
         user,
         setUser,
-        signOutUser
+        signOutUser,
+        loading
     }
     return (
         <AuthContext value={authData}>

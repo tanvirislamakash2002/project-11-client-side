@@ -1,9 +1,13 @@
 
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Register = () => {
     const { createUser, updateUser, setUser } = useAuth()
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state || '/'
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -37,6 +41,7 @@ const Register = () => {
                             icon: 'success'
                         })
                         setUser({ ...user, displayName: name, photoURL: photo })
+                        navigate(from)
                     })
             })
             .catch(error => {
@@ -66,6 +71,8 @@ const Register = () => {
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Register</button>
                     </form>
+                    <p>Already have an account? Please <Link className='text-red-500 underline' to='/login' state={location.state}>Login Now</Link></p>
+
                 </fieldset>
             </div>
         </div>
