@@ -3,6 +3,7 @@ import useAuth from '../hooks/useAuth';
 import { useLoaderData } from 'react-router';
 import ArticleCard from '../components/ArticleCard';
 import CategorySection from '../components/CategorySection';
+import Banner from '../components/Banner/Banner';
 
 
 const Home = () => {
@@ -11,7 +12,9 @@ const Home = () => {
     // console.log(recentArticles)
     return (
         <div>
-            <h2 className="text-3xl text-green-500">This is home</h2>
+            <div>
+                <Banner></Banner>
+            </div>
 
             <div className="grid grid-cols-3">
                 {

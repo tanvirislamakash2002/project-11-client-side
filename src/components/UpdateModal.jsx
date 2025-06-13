@@ -10,45 +10,34 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
     useEffect(() => {
         setSelectedCategory(category || '')
     }, [category])
+    // console.log(selectedCategory)
 
-    const { multi1: multi1Value = '', multi2: multi2Value = '' } = tags || {}
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setSelectedArticle({ ...selectedArticle, [name]: value })
     }
 
-    const handleTagsChange = (e)=>{
-        const{name, value} =e.target;
-        setSelectedArticle({
-            ...selectedArticle,
-            tags:{
-                ...selectedArticle.tags,
-                [name]: value
-            }
-        })
-    }
+
     // edit method 
     const handleEditArticle = (e) => {
         e.preventDefault()
         const form = e.target;
         const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
-        // const { title, content, category, multi1, multi2, thumbnail, date, authorName, authorEmail } = data
+        const updateData = Object.fromEntries(formData.entries())
 
-        // combining tags 
-        const { multi1, multi2, ...newPost } = data
-        newPost.tags = { multi1, multi2 }
         
-
-
-        axios.put(`${import.meta.env.VITE_API_URL}/edit-my-article/${_id}`, newPost)
+        // process tags 
+        const processTags = updateData.tags.split(',').map(tag=>tag.trim())
+        updateData.tags=processTags
+// console.log(data)
+        axios.put(`${import.meta.env.VITE_API_URL}/edit-my-article/${_id}`, updateData)
             .then(data => {
-                
+
                 toast.success("Your Article Posted Successfully!");
-                newPost._id = _id
-                setSelectedArticle(newPost)
-                handleRowUpdate(newPost)
+                updateData._id = _id
+                setSelectedArticle(updateData)
+                handleRowUpdate(updateData)
                 // setUpdateData(selectedArticle)
             })
             .catch(error => {
@@ -82,37 +71,21 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
 
                         <label className="label">Category</label>
 
-                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="select">
-                            <option disabled={true}>Pick a color</option>
-                            <option value='gulistan'>gulistan</option>
-                            <option value='pakistan'>pakistan</option>
-                            <option value='srilanka'>srilanka</option>
-                            <option value='american'>american</option>
-                            <option value='london'>london</option>
+
+                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}  className="select w-full select-shadow">
+                            <option disabled={true}>Select Your Category</option>
+                            <option value='Technology'>Technology</option>
+                            <option value='Science'>Science</option>
+                            <option value='Sports'>Sports</option>
+                            <option value='Politics'>Politics</option>
                         </select>
 
                         <label className="label">Tags</label>
-                        <div className="flex">
-                            <select name='multi1' value={multi1Value} onChange={handleTagsChange} className="select">
-                                <option disabled>Pick a color</option>
-                                <option value='tanvir'>tanvir</option>
-                                <option value='islam'>islam</option>
-                                <option value='akash'>akash</option>
-                                <option value='siddik'>siddik</option>
-                                <option value='amir'>amir</option>
-                            </select>
-                            <select name='multi2' value={multi2Value} onChange={handleTagsChange} className="select">
-                                <option disabled={true}>Pick a color</option>
-                                <option value='what'>what</option>
-                                <option value='the'>the</option>
-                                <option value='fish'>fish</option>
-                                <option value='shirk'>shirk</option>
-                                <option value='abraham'>abraham</option>
-                            </select>
-                        </div>
+                        <input name='tags' type="text" className="input w-full input-shadow" placeholder="Give a title"  onChange={handleChange} value={tags}/>
+
 
                         <label className="label">Thumbnail image</label>
-                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />                       
+                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />
 
                         <label className="label">Date</label>
                         <input name='date' defaultValue={date} type="date" className="input" placeholder="" />

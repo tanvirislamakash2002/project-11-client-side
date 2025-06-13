@@ -14,7 +14,6 @@ const AnimatedOutlet = () => {
         setToggle(changedToggle)
         navigate(changedToggle?'/login':'/register')
     }
-    console.log(location.pathname==='/login')
     return (
         <>
             <div className=" min-h-screen flex flex-col justify-center items-center">

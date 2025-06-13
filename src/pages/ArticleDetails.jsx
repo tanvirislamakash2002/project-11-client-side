@@ -12,7 +12,7 @@ const ArticleDetails = () => {
     const [article, setArticle] = useState(data)
     const [comments, setComments] = useState([])
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title, likedBy = [] } = article || {}
-    const { multi1, multi2 } = tags
+    // const { multi1, multi2 } = tags
 
     // handle like and dislike
     const [liked, setLiked] = useState(likedBy?.includes(user?.email))
@@ -80,7 +80,7 @@ const ArticleDetails = () => {
         }
 
     }, [_id])
-    console.log(comments)
+    // console.log(comments)
     return (
         <div className="card w-96 bg-base-100 shadow-sm">
             <div className="card-body">
@@ -103,7 +103,13 @@ const ArticleDetails = () => {
                     </li>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" className="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                        <span>{multi1}, {multi2}</span>
+                        {/* <span>{multi1}, {multi2}</span> */}
+                        <div className='flex flex-wrap'>
+
+                        {
+                        tags.map(tag=><span className='mr-2 mb-2 block badge  badge-warning'>{tag}</span>)
+                        }
+                        </div>
                     </li>
 
                 </ul>

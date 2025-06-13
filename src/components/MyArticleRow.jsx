@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = myData;
-    const {multi1, multi2} = tags
+    // const {multi1, multi2} = tags
     
     const handleDelete = (id) => {
         Swal.fire({
@@ -40,7 +40,9 @@ const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
             <th>{index + 1}</th>
             <td>{title}</td>
             <td>{content}</td>
-            <td>{multi1}, {multi2}</td>
+            <td>{
+            tags.map((tag, index)=><span key={index} className='badge badge-info mr-2'>{tag}</span>
+            )}</td>
             <td>{category}</td>
             <td>{date}</td>
             <td>

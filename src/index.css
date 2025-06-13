@@ -4,3 +4,13 @@
     themes: light --default
 }
 
+/* custom css */
+.input-shadow{
+    box-shadow: inset 3px 3px 5px 1px rgba(168, 162, 158, 0.5), 
+    3px 3px 10px 3px rgba(0, 0, 0, 0.1), 
+    4px 4px 10px -3px rgba(0, 0, 0, 0.6)
+}
+.select-shadow{
+    box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1), 
+    4px 4px 10px -3px rgba(0, 0, 0, 0.6)
+}

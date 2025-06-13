@@ -22,6 +22,7 @@ const MyArticles = () => {
             console.log(error)
         })
     },[axiosSecure, user])
+    // console.log(articles)
 
 
     const removeDataFromTable = (id) => {
@@ -41,7 +42,7 @@ const MyArticles = () => {
         setArticles(articles.map(article =>
             article._id === updatedData._id ? updatedData : article
         ))
-        // setSelectedArticle({})
+
     }
 
 
@@ -88,6 +89,7 @@ const MyArticles = () => {
                                 <MyArticleRow key={myData._id} myData={myData} index={index} handleEdit={handleEdit} removeDataFromTable={removeDataFromTable}></MyArticleRow>
                             )
                         }
+                    
 
                     </tbody>
                 </table>
