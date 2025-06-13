@@ -56,7 +56,7 @@ const Login = () => {
 
 
         <div className="card bg-base-100 w-full mx-auto max-w-sm " style={{ perspective: '1000px' }}>
-         <div className="flex items-center min-h-screen">
+         {/* <div className="flex items-center min-h-screen"> */}
                <div className="card-body shadow-2xl bg-gray-100/10">
                 <h1 className="text-5xl font-bold">Login now!</h1>
 
@@ -76,7 +76,7 @@ const Login = () => {
                     <p>Don't have an account? Please <Link className='text-red-500 underline' to='/register' state={location.state}>Register Now</Link></p>
                 </fieldset>
             </div>
-         </div>
+         {/* </div> */}
         </div>
 
     );

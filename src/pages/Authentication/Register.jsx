@@ -55,7 +55,7 @@ const Register = () => {
     }
     return (
         <div className="card bg-base-100 w-full mx-auto max-w-sm" style={{ perspective: '1000px' }}>
-            <div className="flex items-center min-h-screen">
+            {/* <div className="flex items-center min-h-screen"> */}
                 <div className="card-body bg-gray-100/10 shadow-xl">
                     <h1 className="text-5xl font-bold">Register now!</h1>
 
@@ -76,7 +76,7 @@ const Register = () => {
 
                     </fieldset>
                 </div>
-            </div>
+            {/* </div> */}
         </div>
     );
 };
