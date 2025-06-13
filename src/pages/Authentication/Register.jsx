@@ -1,6 +1,6 @@
 
 import Swal from 'sweetalert2';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 
 const Register = () => {
@@ -54,26 +54,28 @@ const Register = () => {
 
     }
     return (
-        <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
-            <div className="card-body">
-                <h1 className="text-5xl font-bold">Register now!</h1>
+        <div className="card bg-base-100 w-full mx-auto max-w-sm" style={{ perspective: '1000px' }}>
+            <div className="flex items-center min-h-screen">
+                <div className="card-body bg-gray-100/10 shadow-xl">
+                    <h1 className="text-5xl font-bold">Register now!</h1>
 
-                <fieldset className="">
-                    <form onSubmit={handleRegister} className='fieldset'>
-                        <label className="label">Name</label>
-                        <input required name='name' type="text" className="input" placeholder="Name" />
-                        <label className="label">Email</label>
-                        <input required name='email' type="email" className="input" placeholder="Email" />
-                        <label className="label">Photo URL</label>
-                        <input required name='photo' type="text" className="input" placeholder="Photo URL" />
-                        <label className="label">Password</label>
-                        <input required name='password' type="password" className="input" placeholder="Password" />
-                        <div><a className="link link-hover">Forgot password?</a></div>
-                        <button className="btn btn-neutral mt-4">Register</button>
-                    </form>
-                    <p>Already have an account? Please <Link className='text-red-500 underline' to='/login' state={location.state}>Login Now</Link></p>
+                    <fieldset className="">
+                        <form onSubmit={handleRegister} className='fieldset'>
+                            <label className="label">Name</label>
+                            <input required name='name' type="text" className="input" placeholder="Name" />
+                            <label className="label">Email</label>
+                            <input required name='email' type="email" className="input" placeholder="Email" />
+                            <label className="label">Photo URL</label>
+                            <input required name='photo' type="text" className="input" placeholder="Photo URL" />
+                            <label className="label">Password</label>
+                            <input required name='password' type="password" className="input" placeholder="Password" />
+                            <div><a className="link link-hover">Forgot password?</a></div>
+                            <button className="btn btn-neutral mt-4">Register</button>
+                        </form>
+                        <p>Already have an account? Please <Link className='text-red-500 underline' to='/login' state={location.state}>Login Now</Link></p>
 
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
         </div>
     );

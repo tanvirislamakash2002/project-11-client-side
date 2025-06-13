@@ -6,11 +6,14 @@ import {
 } from "react-router";
 import router from './router/router.jsx'
 import AuthProvider from './provider/AuthProvider.jsx';
+import { AnimatePresence } from 'framer-motion';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <AnimatePresence>
+        <RouterProvider router={router} />
+      </AnimatePresence>
     </AuthProvider>
   </StrictMode>,
 )

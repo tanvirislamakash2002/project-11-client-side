@@ -1,6 +1,6 @@
 
 import Swal from 'sweetalert2';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
@@ -55,8 +55,9 @@ const Login = () => {
     return (
 
 
-        <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl">
-            <div className="card-body">
+        <div className="card bg-base-100 w-full mx-auto max-w-sm " style={{ perspective: '1000px' }}>
+         <div className="flex items-center min-h-screen">
+               <div className="card-body shadow-2xl bg-gray-100/10">
                 <h1 className="text-5xl font-bold">Login now!</h1>
 
                 <fieldset className="fieldset">
@@ -75,6 +76,7 @@ const Login = () => {
                     <p>Don't have an account? Please <Link className='text-red-500 underline' to='/register' state={location.state}>Register Now</Link></p>
                 </fieldset>
             </div>
+         </div>
         </div>
 
     );

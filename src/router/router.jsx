@@ -6,25 +6,27 @@ import Home from "../pages/Home";
 import AllArticles from "../pages/AllArticles";
 import PostArticle from "../pages/PostArticle";
 import MyArticles from "../pages/MyArticles";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/Authentication/Login";
+import Register from "../pages/Authentication/Register";
 import axios from "axios";
 import ArticleDetails from "../pages/ArticleDetails";
 import Loading from "../pages/Loading";
 import ArticlesFilterByCategory from "../pages/ArticlesFilterByCategory";
 import PrivateRoute from "../provider/PrivateRoute";
 import ErrorPage from "../pages/ErrorPage";
+import AnimatedOutlet from "../pages/Authentication/AnimatedOutlet";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
-        errorElement:<ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
                 loader: () => axios(`${import.meta.env.VITE_API_URL}/recent-articles`),
+                hydrateFallbackElement: <Loading></Loading>,
                 element: <Home></Home>
             },
             {
@@ -62,7 +64,12 @@ const router = createBrowserRouter([
                 loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/filter-by-category/${params.category}`),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <ArticlesFilterByCategory></ArticlesFilterByCategory>
-            },
+            }
+        ]
+    },
+    {
+        element: <AnimatedOutlet></AnimatedOutlet>,
+        children: [
             {
                 path: '/login',
                 element: <Login></Login>
@@ -72,7 +79,7 @@ const router = createBrowserRouter([
                 element: <Register></Register>
             },
         ]
-    },
+    }
 ]);
 
 export default router
