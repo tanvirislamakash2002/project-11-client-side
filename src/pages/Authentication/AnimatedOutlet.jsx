@@ -16,7 +16,7 @@ const AnimatedOutlet = () => {
     }
     return (
         <>
-            <div className=" min-h-screen flex flex-col justify-center items-center">
+            <div className=" min-h-screen gap-4 flex flex-col justify-center items-center">
 
                 <label className="relative cursor-pointer">
                     <input type="checkbox" className="sr-only peer" checked={toggle} onChange={handleToggle} />

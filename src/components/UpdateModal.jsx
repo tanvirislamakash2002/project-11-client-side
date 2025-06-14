@@ -54,22 +54,22 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
         <dialog id="my_modal_3" className="modal">
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             {/* <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>open modal</button> */}
-            <div className="modal-box max-w-7xl mx-auto">
+            <div className="modal-box max-w-xl mx-auto bg-slate-600/60">
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-2xl text-white bg-red-300 p-4">✕</button>
                 </form>
-                <div className=" w-2xl mx-auto">
-                    <form method="dialog" onSubmit={handleEditArticle} className="mx-auto fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                <div className=" w-full mx-auto">
+                    <form method="dialog" onSubmit={handleEditArticle} className="mx-auto fieldset rounded-box w-md p-4">
                         <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
-                        <label className="label">Title</label>
-                        <input name='title' value={title} type="text" className="input" placeholder="Give a title" onChange={handleChange} />
+                        <label className="label text-white text-lg">Title</label>
+                        <input name='title' value={title} type="text" className="input input-shadow w-full" placeholder="Give a title" onChange={handleChange} />
 
-                        <label className="label">Content </label>
-                        <textarea name='content' value={content} className="textarea" placeholder="Content " onChange={handleChange}></textarea>
+                        <label className="label text-white text-lg">Content </label>
+                        <textarea name='content' value={content} className="textarea input-shadow w-full" placeholder="Content " onChange={handleChange}></textarea>
 
-                        <label className="label">Category</label>
+                        <label className="label text-white text-lg">Category</label>
 
 
                         <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}  className="select w-full select-shadow">
@@ -80,25 +80,25 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                             <option value='Politics'>Politics</option>
                         </select>
 
-                        <label className="label">Tags</label>
+                        <label className="label text-white text-lg">Tags</label>
                         <input name='tags' type="text" className="input w-full input-shadow" placeholder="Give a title"  onChange={handleChange} value={tags}/>
 
 
-                        <label className="label">Thumbnail image</label>
-                        <input name='thumbnail' value={thumbnail} type="text" className="input" placeholder="Thumbnail image" onChange={handleChange} />
+                        <label className="label text-white text-lg">Thumbnail image</label>
+                        <input name='thumbnail' value={thumbnail} type="text" className="input input-shadow w-full" placeholder="Thumbnail image" onChange={handleChange} />
 
-                        <label className="label">Date</label>
-                        <input name='date' defaultValue={date} type="date" className="input" placeholder="" />
+                        <label className="label text-white text-lg">Date</label>
+                        <input name='date' defaultValue={date} type="date" className="input select-shadow w-full" placeholder="" />
 
-                        <label className="label">My Info</label>
-                        <input value={authorName} name='authorName' type="text" className="input" />
-                        <input value={authorEmail} name='authorEmail' type="text" className="input" />
+                        <label className="label text-white text-lg">My Info</label>
+                        <input value={authorName} name='authorName' type="text" className="input w-full" />
+                        <input value={authorEmail} name='authorEmail' type="text" className="input w-full" />
 
                         <button className="btn btn-neutral mt-4">Edit Article</button>
                     </form>
                 </div>
                 <form method="dialog" className='flex justify-end'>
-                    <button className='btn btn-error'>Cancel Editing</button>
+                    <button className='btn btn-error text-white'>Cancel Editing</button>
                 </form>
             </div>
 

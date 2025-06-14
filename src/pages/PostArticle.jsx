@@ -37,7 +37,7 @@ const PostArticle = () => {
     }
     return (
         <form onSubmit={handlePostArticle} className="flex items-center justify-center min-h-screen">
-            <div className=" fieldset bg-base-200 border-base-300 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
+            <div className=" fieldset bg-stone-600/20 border-base-300 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
                 <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
                 <label className="label akash">Title</label>

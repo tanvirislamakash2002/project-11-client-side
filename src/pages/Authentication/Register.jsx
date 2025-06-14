@@ -54,7 +54,7 @@ const Register = () => {
 
     }
     return (
-        <div className="card bg-base-100 w-full mx-auto max-w-sm" style={{ perspective: '1000px' }}>
+        <div className="card bg-base-100 w-full mx-auto max-w-sm select-shadow" style={{ perspective: '1000px' }}>
             {/* <div className="flex items-center min-h-screen"> */}
                 <div className="card-body bg-gray-100/10 shadow-xl">
                     <h1 className="text-5xl font-bold">Register now!</h1>
@@ -62,14 +62,14 @@ const Register = () => {
                     <fieldset className="">
                         <form onSubmit={handleRegister} className='fieldset'>
                             <label className="label">Name</label>
-                            <input required name='name' type="text" className="input" placeholder="Name" />
+                            <input required name='name' type="text" className="input input-shadow" placeholder="Name" />
                             <label className="label">Email</label>
-                            <input required name='email' type="email" className="input" placeholder="Email" />
+                            <input required name='email' type="email" className="input input-shadow" placeholder="Email" />
                             <label className="label">Photo URL</label>
-                            <input required name='photo' type="text" className="input" placeholder="Photo URL" />
+                            <input required name='photo' type="text" className="input input-shadow" placeholder="Photo URL" />
                             <label className="label">Password</label>
-                            <input required name='password' type="password" className="input" placeholder="Password" />
-                            <div><a className="link link-hover">Forgot password?</a></div>
+                            <input required name='password' type="password" className="input input-shadow" placeholder="Password" />
+
                             <button className="btn btn-neutral mt-4">Register</button>
                         </form>
                         <p>Already have an account? Please <Link className='text-red-500 underline' to='/login' state={location.state}>Login Now</Link></p>

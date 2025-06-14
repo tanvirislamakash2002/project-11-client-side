@@ -20,6 +20,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate(from)
             })
             .then(error => {
                 // console.log(error)
@@ -55,7 +56,7 @@ const Login = () => {
     return (
 
 
-        <div className="card bg-base-100 w-full mx-auto max-w-sm " style={{ perspective: '1000px' }}>
+        <div className="card bg-base-100 w-full mx-auto max-w-sm select-shadow" style={{ perspective: '1000px' }}>
          {/* <div className="flex items-center min-h-screen"> */}
                <div className="card-body shadow-2xl bg-gray-100/10">
                 <h1 className="text-5xl font-bold">Login now!</h1>
@@ -63,9 +64,9 @@ const Login = () => {
                 <fieldset className="fieldset">
                     <form onSubmit={handleLogin} className='fieldset'>
                         <label className="label">Email</label>
-                        <input required name='email' type="email" className="input" placeholder="Email" />
+                        <input required name='email' type="email" className="input input-shadow" placeholder="Email" />
                         <label className="label">Password</label>
-                        <input required name='password' type="password" className="input" placeholder="Password" />
+                        <input required name='password' type="password" className="input input-shadow" placeholder="Password" />
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Login</button>
                     </form>

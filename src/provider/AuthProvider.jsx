@@ -8,7 +8,12 @@ import axios from 'axios';
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [darkMode, setDarkMode] = useState(false)
 
+    useEffect(()=>{
+        localStorage.setItem('darkMode', darkMode)
+        setDarkMode(localStorage.getItem('darkMode')==='false'?false:true)
+    },[darkMode])
     // Register
     const createUser = (email, password) => {
         setLoading(true)
@@ -71,7 +76,9 @@ const AuthProvider = ({ children }) => {
         user,
         setUser,
         signOutUser,
-        loading
+        loading,
+        darkMode,
+        setDarkMode
     }
     return (
         <AuthContext value={authData}>

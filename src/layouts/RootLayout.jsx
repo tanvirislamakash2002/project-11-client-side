@@ -4,9 +4,11 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ToastContainer } from 'react-toastify';
 import Loading from '../pages/Loading';
+import useAuth from '../hooks/useAuth';
 
 const RootLayout = () => {
     const navigation = useNavigation()
+    const {darkMode} = useAuth()
     // if(navigation.state==='loading'){
     //     return <Loading></Loading>
     // }
@@ -16,7 +18,7 @@ const RootLayout = () => {
                 <Navbar></Navbar>
             </header>
 
-            <main className='min-h-[calc(100vh-285px)]'>
+            <main className={`${darkMode?`bg-black`:``} min-h-[calc(100vh-285px)]`}>
                 {
                     navigation.state==='loading'?
                     <Loading></Loading>

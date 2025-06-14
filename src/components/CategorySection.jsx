@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 const CategorySection = () => {
 
     return (
-        <section className="p-6 my-6 dark:bg-gray-100 dark:text-gray-800 ">
-            <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-3">
+        <section className="p-6 my-6 dark:bg-gray-100/30 dark:text-gray-800 ">
+            <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
                 <Link to={`/filter-by-category/Technology`}>
                     <div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-400 dark:text-gray-800 justify-center">
                         <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-600">
