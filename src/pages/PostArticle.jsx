@@ -65,6 +65,7 @@ const PostArticle = () => {
                 <label className="label">My Info</label>
                 <input name='authorName' type="text" className="input w-full" value={user?.displayName} />
                 <input name='authorEmail' type="text" className="input w-full" value={user?.email} />
+                <input name='authorPhoto' type="text" className="input w-full" value={user?.photoURL} />
 
                 <button className="btn btn-neutral mt-4">Publish</button>
             </div>

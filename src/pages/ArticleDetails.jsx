@@ -4,6 +4,9 @@ import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { MdOutlineDateRange } from "react-icons/md";
+import { FaRegUser, FaRegComment } from "react-icons/fa";
+import { BiLike, BiDislike } from "react-icons/bi";
 
 const ArticleDetails = () => {
     const navigate = useNavigate()
@@ -11,7 +14,7 @@ const ArticleDetails = () => {
     const { data } = useLoaderData()
     const [article, setArticle] = useState(data)
     const [comments, setComments] = useState([])
-    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title, likedBy = [] } = article || {}
+    const { _id, authorEmail, authorName, authorPhoto, category, content, date, tags, thumbnail, title, likedBy = [] } = article || {}
     // const { multi1, multi2 } = tags
 
     // handle like and dislike
@@ -45,6 +48,7 @@ const ArticleDetails = () => {
         else {
             return navigate('/login')
         }
+
     }
 
     // handle comment article 
@@ -54,8 +58,8 @@ const ArticleDetails = () => {
         const commentData = { article_id: _id, commenter_name: user?.displayName, commenter_photo: user?.photoURL, comment }
         console.log(commentData)
         axios.post(`${import.meta.env.VITE_API_URL}/comment-article`, commentData)
-        .then(data => {
-            setComments([...comments, commentData]) 
+            .then(data => {
+                setComments([...comments, commentData])
                 // console.log('data form axios',data)
                 toast.success("Comment added Successfully!");
             })
@@ -66,7 +70,7 @@ const ArticleDetails = () => {
             })
     }
 
-    
+
 
     useEffect(() => {
         try {
@@ -82,61 +86,67 @@ const ArticleDetails = () => {
     }, [_id])
     // console.log(comments)
     return (
-        <div className="card w-96 bg-violet-100 shadow-sm mx-auto">
-            <div className="card-body">
-                <div><img src={thumbnail} alt="" /></div>
-                <span className="badge  badge-warning">{authorEmail}</span>
-                <span className="badge  badge-warning">{authorName}</span>
-                <span className="badge  badge-warning">{likeCount}</span>
-                <div className="flex justify-between">
-                    <h2 className="text-3xl font-bold">{category}</h2>
-                    <span className="text-xl">{date}</span>
-                </div>
-                <ul className="mt-6 flex flex-col gap-2 text-lg">
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                        <span>{title}</span>
-                    </li>
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                        <span>{content}</span>
-                    </li>
-                    <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="size-4 me-2 inline-block text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                        {/* <span>{multi1}, {multi2}</span> */}
-                        <div className='flex flex-wrap'>
+        <div className="py-16">
+            <div className="card w-96 bg-violet-700/30 shadow-sm mx-auto">
+                <div className="card-body">
+                    <div><img src={thumbnail} alt="" /></div>
+                    <div className="">
+                        <h2 className="text-3xl font-bold">{title}</h2>
+                        {/* <span className="text-xl">{date}</span> */}
+                        <p>{content}</p>
+                    </div>
+                    <p className="text-xl"><span className='font-semibold'>Category:</span> {category}</p>
+                    <div className='flex flex-wrap'>
 
                         {
-                        tags.map(tag=><span className='mr-2 mb-2 block badge  badge-warning'>{tag}</span>)
+                            tags.map((tag, index) => <span key={index} className='mr-2 mb-2 block badge  badge-warning'>{tag}</span>)
                         }
-                        </div>
-                    </li>
-
-                </ul>
-                <div className="mt-6">
-                    <button className="btn btn-primary btn-block" onClick={handleLike}>{liked ? `Dislike` : `Like`}</button>
-                </div>
-                <form onSubmit={handleComment}>
-                    <textarea name='comment' className="textarea w-full" placeholder="Bio"></textarea>
-                    <div className="flex justify-end">
-                        <input type="submit" value="post" className='btn btn-success' />
                     </div>
-                </form>
-            </div>
-            {
-                comments.map(comment => <div key={comment._id} className="card card-dash bg-base-100 w-96">
-                    <div className="card-body">
+                    <div className='flex gap-5 items-center'>
                         <div className="avatar">
-                            <div className="mask mask-squircle w-24">
-                                <img src={comment.commenter_photo} />
+                            <div className="w-24 rounded-full">
+                                <img src={authorPhoto} />
                             </div>
                         </div>
-                        <p>{comment.commenter_name}</p>
-                        <p>{comment.comment}</p>
+                        {/* <img src={authorPhoto} alt="" /> */}
+                        <div className="">
+                            <p className="text-xl flex items-center gap-2"><FaRegUser />{authorName}</p>
+                            <p className="text-lg flex items-center gap-2"><MdOutlineDateRange />{date}</p>
+                        </div>
                     </div>
-                </div>)
-            }
 
+                    <div className="flex justify-between">
+                        <div className="mt-6">
+                            <button className="btn btn-primary" onClick={handleLike}>{liked ? <BiDislike /> : <BiLike />}</button>
+                            Liked by {likeCount}
+                        </div>
+                        <div className="mt-6">
+                             {comments.length} comments
+                            <button className="btn btn-primary" onClick={handleLike}>{<FaRegComment />}</button>
+                        </div>
+                    </div>
+                    <form onSubmit={handleComment}>
+                        <textarea name='comment' className="textarea w-full" placeholder="Bio"></textarea>
+                        <div className="flex justify-end">
+                            <input type="submit" value="post" className='btn btn-success' />
+                        </div>
+                    </form>
+                </div>
+
+                {
+                    comments.map(comment => <div key={comment._id} className="card card-dash bg-base-100 w-96">
+                        <div className="card-body">
+                            <div className="avatar">
+                                <div className="mask mask-squircle w-24">
+                                    <img src={comment.commenter_photo} />
+                                </div>
+                            </div>
+                            <p>{comment.commenter_name}</p>
+                            <p>{comment.comment}</p>
+                        </div>
+                    </div>)
+                }
+            </div>
         </div>
     );
 };
