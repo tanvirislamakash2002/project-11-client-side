@@ -19,15 +19,13 @@ const PostArticle = () => {
         data.tags=processTags
         console.log(data)
 
-        //  combining tags 
-        // const { multi1, multi2, ...newPost } = data
-        // newPost.tags = { multi1, multi2 }
-        // console.log(newPost)
+
 
         axios.post(`${import.meta.env.VITE_API_URL}/post-article`, data)
             .then(data => {
                 // console.log('data form axios',data)
                 toast.success("Your Article Posted Successfully!");
+                form.reset()
             })
             .catch(error => {
                 console.log(error);
@@ -57,27 +55,7 @@ const PostArticle = () => {
 
                 <label className="label">Tags</label>
                 <input name='tags' type="text" className="input w-full input-shadow" placeholder="Give a title" />
-                {/* <div className="flex gap-2"> */}
-                {/* <select name='multi1' defaultValue="Pick a color" className="select select-shadow">
-                        <option disabled={true}>Pick a color</option>
-                        <option>tanvir</option>
-                        <option>islam</option>
-                        <option>akash</option>
-                    </select>
-                    <select name='multi2' defaultValue="Pick a color" className="select select-shadow">
-                        <option disabled={true}>Pick a color</option>
-                        <option>what</option>
-                        <option>the</option>
-                        <option>fish</option>
-                    </select> */}
-                {/* <select name='multi2' defaultValue="Pick a color" className="select">
-                        <option disabled={true}>Pick a color</option>
-                        <option>what</option>
-                        <option>the</option>
-                        <option>fish</option>
-                    </select> */}
-                {/* </div> */}
-
+ 
                 <label className="label">Thumbnail image</label>
                 <input name='thumbnail' type="text" className="input w-full input-shadow" placeholder="Thumbnail image" />
 

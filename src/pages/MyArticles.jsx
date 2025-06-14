@@ -7,21 +7,21 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyArticles = () => {
     // const { data } = useLoaderData()
-    const {user} = useAuth()
+    const { user, darkMode } = useAuth()
     const axiosSecure = useAxiosSecure()
 
     const [articles, setArticles] = useState([])
     const [selectedArticle, setSelectedArticle] = useState({})
 
-    useEffect(()=>{
+    useEffect(() => {
         axiosSecure(`/my-articles/${user.email}`)
-        .then(data=>{
-            setArticles(data?.data)
-        })
-        .catch(error=>{
-            console.log(error)
-        })
-    },[axiosSecure, user])
+            .then(data => {
+                setArticles(data?.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [axiosSecure, user])
     // console.log(articles)
 
 
@@ -47,27 +47,95 @@ const MyArticles = () => {
 
 
     return (
-        <>
-
-            <div className=" p-8 sm:flex sm:space-x-6 dark:bg-gray-50 dark:text-gray-800 w-full">
-                <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
-                    <img src={user?.photoURL} alt="" className="object-cover object-center w-full h-full rounded dark:bg-gray-500" />
+        <div className='max-w-7xl w-11/12 mx-auto'>
+            <div className={`${darkMode?`text-white`:``} stats shadow flex flex-row-reverse`}>
+                <div className="stat">
+                    <div className="stat-figure">
+                        {/* <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="inline-block h-8 w-8 stroke-current"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                            ></path>
+                        </svg> */}
+                    </div>
+                    <div className="">Total Likes</div>
+                    <div className="stat-value">25.6K
+                                             <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="inline-block h-8 w-8 stroke-current"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    {/* <div className="stat-desc">21% more than last month</div> */}
                 </div>
-                <div className="flex flex-col space-y-4">
-                    <div>
-                        <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
-                    </div>
-                    <div className="space-y-1">
-                        <span className="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-label="Email address" className="w-4 h-4">
-                                <path fill="currentColor" d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"></path>
-                            </svg>
-                            <span className="dark:text-gray-600">{user?.email}</span>
-                        </span>
 
+                <div className="stat">
+                    {/* <div className="stat-figure ">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="inline-block h-8 w-8 stroke-current"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"
+                            ></path>
+                        </svg>
+                    </div> */}
+                    <div className="">The number of articles</div>
+                    <div className="stat-value ">{articles?.length}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="inline-block h-8 w-8 stroke-current"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"
+                            ></path>
+                        </svg>
                     </div>
+
+                    {/* <div className="stat-desc">21% more than last month</div> */}
+                </div>
+
+                <div className="stat flex items-center">
+                    <div className="">
+                        <div className="avatar">
+                            <div className="w-26 rounded-xl">
+                                <img src={user?.photoURL} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="">
+                        <div className="stat-value text-3xl">{user?.displayName}</div>
+                        <div className=" text-2xl">{user?.email}</div>
+                    </div>
+                    {/* <div className="stat-desc ">31 tasks remaining</div> */}
                 </div>
             </div>
+
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                 <table className="table">
                     {/* head */}
@@ -89,14 +157,14 @@ const MyArticles = () => {
                                 <MyArticleRow key={myData._id} myData={myData} index={index} handleEdit={handleEdit} removeDataFromTable={removeDataFromTable}></MyArticleRow>
                             )
                         }
-                    
+
 
                     </tbody>
                 </table>
                 {selectedArticle && <UpdateModal selectedArticle={selectedArticle} setSelectedArticle={setSelectedArticle} handleRowUpdate={handleRowUpdate}></UpdateModal>}
             </div>
 
-        </>
+        </div>
     );
 };
 

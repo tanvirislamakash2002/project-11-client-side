@@ -7,8 +7,7 @@ const ArticlesFilterByCategory = () => {
     // console.log(data)
     return (
         <div>
-            filtered article
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-8 py-14">
                 {
                     data.map(articleData => <ArticleCard articleData={articleData}></ArticleCard>)
                 }

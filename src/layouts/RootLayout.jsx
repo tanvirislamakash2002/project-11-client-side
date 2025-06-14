@@ -18,7 +18,7 @@ const RootLayout = () => {
                 <Navbar></Navbar>
             </header>
 
-            <main className={`${darkMode?`bg-black`:``} min-h-[calc(100vh-285px)]`}>
+            <main className={`${darkMode?`bg-[#23262B]`:``} min-h-[calc(100vh-285px)]`}>
                 {
                     navigation.state==='loading'?
                     <Loading></Loading>

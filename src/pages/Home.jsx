@@ -16,10 +16,13 @@ const Home = () => {
                 <Banner></Banner>
             </div>
 
-            <div className="grid grid-cols-3">
-                {
-                    recentArticles.map(articleData => <ArticleCard key={articleData._id} articleData={articleData}></ArticleCard>)
-                }
+            <div className=" my-16">
+                <h2 className="font-bold text-5xl text-center mt-12 mb-10">Recently Posted Articles</h2>
+                <div className="grid grid-cols-3 gap-8">
+                    {
+                        recentArticles.map(articleData => <ArticleCard key={articleData._id} articleData={articleData}></ArticleCard>)
+                    }
+                </div>
             </div>
 
             {/* filter by article by category */}
