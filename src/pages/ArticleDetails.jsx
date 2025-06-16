@@ -10,7 +10,7 @@ import { BiLike, BiDislike } from "react-icons/bi";
 
 const ArticleDetails = () => {
     const navigate = useNavigate()
-    const { user } = useAuth()
+    const { user, darkMode } = useAuth()
     const { data } = useLoaderData()
     const [article, setArticle] = useState(data)
     const [comments, setComments] = useState([])
@@ -27,7 +27,8 @@ const ArticleDetails = () => {
 
     const handleLike = () => {
         if (user?.email === authorEmail) {
-            return Swal.fire({ title: 'you cannot like your own post', icon: 'error' })
+            // return Swal.fire({ title: 'you cannot like your own post', icon: 'error' })
+            return toast.error("you cannot like your own post");
         }
 
         if (user) {
@@ -39,11 +40,13 @@ const ArticleDetails = () => {
                     const isLiked = data?.data?.liked
                     setLiked(isLiked)
                     setLikeCount(prev => (isLiked ? prev + 1 : prev - 1))
+                    isLiked?toast.success('You have liked the article'):toast.warning('You have disliked the article')
                 })
                 .catch(error => {
                     console.log(error)
                 })
-            Swal.fire({ title: 'You have liked the post', icon: 'success' })
+            // Swal.fire({ title: 'You have liked the post', icon: 'success' })
+            // toast.success('You have liked the article')
         }
         else {
             return navigate('/login')
@@ -86,7 +89,7 @@ const ArticleDetails = () => {
     }, [_id])
     // console.log(comments)
     return (
-        <div className="py-16">
+        <div className={`${darkMode?'text-white':''} py-16 flex flex-col items-center`}>
             <div className="card w-96 bg-violet-700/30 shadow-sm mx-auto">
                 <div className="card-body">
                     <div><img src={thumbnail} alt="" /></div>
@@ -99,7 +102,7 @@ const ArticleDetails = () => {
                     <div className='flex flex-wrap'>
 
                         {
-                            tags.map((tag, index) => <span key={index} className='mr-2 mb-2 block badge  badge-warning'>{tag}</span>)
+                            tags.map((tag, index) => <span key={index} className='mr-2 mb-2 block badge  bg-violet-500 text-white border-violet-900'>{tag}</span>)
                         }
                     </div>
                     <div className='flex gap-5 items-center'>
@@ -116,37 +119,37 @@ const ArticleDetails = () => {
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="mt-6">
-                            <button className="btn btn-primary" onClick={handleLike}>{liked ? <BiDislike /> : <BiLike />}</button>
-                            Liked by {likeCount}
+                        <div className="mt-6 flex items-center gap-2">
+                            <button className={`${liked?'text-red-900 bg-red-300 hover:bg-red-900 hover:text-red-300':'text-green-900 bg-green-300 hover:bg-green-900 hover:text-green-300'} btn rounded-full text-xl border-0 `} onClick={handleLike}>{liked ? <BiDislike /> : <BiLike />}</button>
+                            <p className='text-sm font-semibold'>Liked by <span className='badge'>{likeCount}</span></p>
                         </div>
-                        <div className="mt-6">
-                             {comments.length} comments
-                            <button className="btn btn-primary" onClick={handleLike}>{<FaRegComment />}</button>
+                        <div className="mt-6 flex items-center gap-2">
+                             <p className='text-sm font-semibold'><span className='badge bg-violet-700 text-white border-0'>{comments.length}</span> comments</p>
+                            <button className="btn btn-primary">{<FaRegComment />}</button>
                         </div>
                     </div>
                     <form onSubmit={handleComment}>
-                        <textarea name='comment' className="textarea w-full" placeholder="Bio"></textarea>
+                        <textarea name='comment' className="textarea w-full bg-violet-400/50 placeholder-white" placeholder="Give an opinion on the article"></textarea>
                         <div className="flex justify-end">
-                            <input type="submit" value="post" className='btn btn-success' />
+                            <input type="submit" value="post" className='btn border-violet-600 text-white bg-violet-600 hover:bg-white hover:text-violet-600 mt-2 ' />
                         </div>
                     </form>
                 </div>
 
+            </div>
                 {
-                    comments.map(comment => <div key={comment._id} className="card card-dash bg-base-100 w-96">
+                    comments.map(comment => <div key={comment._id} className="card bg-violet-500/50 w-96 mt-2 ">
                         <div className="card-body">
-                            <div className="avatar">
-                                <div className="mask mask-squircle w-24">
+                            <div className="avatar items-center gap-5">
+                                <div className="mask mask-squircle w-14">
                                     <img src={comment.commenter_photo} />
                                 </div>
+                            <p className='font-semibold text-lg'>{comment.commenter_name}</p>
                             </div>
-                            <p>{comment.commenter_name}</p>
-                            <p>{comment.comment}</p>
+                            <p className='text-lg border-t-2 border-dashed border-violet-400'>{comment.comment}</p>
                         </div>
                     </div>)
                 }
-            </div>
         </div>
     );
 };

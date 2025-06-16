@@ -5,12 +5,23 @@
 }
 
 /* custom css */
-.input-shadow{
-    box-shadow: inset 3px 3px 5px 1px rgba(168, 162, 158, 0.5), 
-    3px 3px 10px 3px rgba(0, 0, 0, 0.1), 
-    4px 4px 10px -3px rgba(0, 0, 0, 0.6)
+.input-shadow {
+    box-shadow:
+        inset 3px 3px 5px 0px rgb(75 75 75 / 30%), 
+        inset -3px -3px 5px 0px rgba(255, 255, 255, 0.30), 
+        -3px -3px 10px 0px rgba(255, 255, 255, 0.50), 
+        3px 3px 10px 0px rgb(75 75 75 / 30%);
+    background:rgb(245 210 245 / 30%);
+    font-weight:bold
 }
-.select-shadow{
-    box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1), 
-    4px 4px 10px -3px rgba(0, 0, 0, 0.6)
+
+.select-shadow {
+    box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1),
+        1px 1px 7px 0px rgba(0, 0, 0, 0.6);
+        background:rgb(245 210 245 / 30%);
+}
+
+a.active{
+    background-color: rgb(190, 95, 230);
+    color: white;
 }

@@ -28,13 +28,15 @@ const Navbar = () => {
 
 
     const links = <>
-        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>Home</NavLink></li>
-        <li><NavLink to={'/allArticles'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>All Articles</NavLink></li>
-        {/* <li><NavLink to={'/postArticle'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>Post Article</NavLink></li>
-        <li><NavLink to={'/myArticles'} className={({ isActive }) => isActive ? 'text-red-400' : 'text-green-500'}>My Articles</NavLink></li> */}
+
+
+
+        <li><NavLink to={'/'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] mr-2 hover:bg-[#be5fe6] hover:text-white`}>Home</NavLink></li>
+        <li><NavLink to={'/allArticles'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] hover:bg-[#be5fe6] hover:text-white`}>All Articles</NavLink></li>
+
     </>
     return (
-        <div className={`${darkMode ? 'bg-[#191a1d]' : 'bg-violet-100'}  `}>
+        <div className={`${darkMode ? 'bg-[#191a1d]' : 'bg-violet-100/90'} fixed inset-x-0 top-0 z-50`}>
             <div className="max-w-7xl navbar mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -104,8 +106,17 @@ const Navbar = () => {
                         </>
                         :
                         <>
-                            <Link to='/login' className='btn'>Login</Link>
-                            <Link to='/register' state={location.state} className='btn'>Register</Link>
+                            {/* <Link to='/login' className='btn'>Login</Link>
+                            <Link to='/register' state={location.state} className='btn'>Register</Link> */}
+
+                            <Link to='/login' className="relative inline-block text-lg group">
+                                <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
+                                    <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+                                    <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
+                                    <span className="relative">Login</span>
+                                </span>
+                                <span className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0" data-rounded="rounded-lg"></span>
+                            </Link>
                         </>
                     }
                 </div>

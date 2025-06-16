@@ -14,7 +14,7 @@ const RootLayout = () => {
     // }
     return (
         <div>
-            <header>
+            <header className='relative'>
                 <Navbar></Navbar>
             </header>
 

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 
 const PostArticle = () => {
-    const { user } = useAuth()
+    const { user, darkMode } = useAuth()
 
     const handlePostArticle = (e) => {
         e.preventDefault()
@@ -34,38 +34,38 @@ const PostArticle = () => {
             })
     }
     return (
-        <form onSubmit={handlePostArticle} className="flex items-center justify-center min-h-screen">
-            <div className=" fieldset bg-stone-600/20 border-base-300 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
+        <form onSubmit={handlePostArticle} className={`${darkMode?'text-white':''} flex items-center justify-center min-h-screen`}>
+            <div className=" fieldset bg-violet-600/20 border-base-300/30 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
                 <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
-                <label className="label akash">Title</label>
-                <input name='title' type="text" className="input w-full input-shadow" placeholder="Give a title" />
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Title</label>
+                <input name='title' type="text" className={`${darkMode?'text-white placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
 
-                <label className="label">Content </label>
-                <textarea name='content' className="textarea w-full input-shadow" placeholder="Write your Content here"></textarea>
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Content </label>
+                <textarea name='content' className={`${darkMode?'text-white placeholder-white':''} textarea w-full input-shadow `} placeholder="Write your Content here"></textarea>
 
-                <label className="label">Category</label>
-                <select name='category' defaultValue="Random" className="select w-full select-shadow">
-                    <option disabled={true}>Select Your Category</option>
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Category</label>
+                <select name='category' defaultValue="Random" className="select w-full select-shadow font-semibold">
+                    <option value='Random' disabled={true}>Select Your Category</option>
                     <option>Technology</option>
                     <option>Science</option>
                     <option>Sports</option>
                     <option>Politics</option>
                 </select>
 
-                <label className="label">Tags</label>
-                <input name='tags' type="text" className="input w-full input-shadow" placeholder="Give a title" />
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Tags</label>
+                <input name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
  
-                <label className="label">Thumbnail image</label>
-                <input name='thumbnail' type="text" className="input w-full input-shadow" placeholder="Thumbnail image" />
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Thumbnail image</label>
+                <input name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Thumbnail image" />
 
-                <label className="label">Date</label>
-                <input name='date' type="date" className="input w-full select-shadow" placeholder="" />
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Date</label>
+                <input name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
 
-                <label className="label">My Info</label>
-                <input name='authorName' type="text" className="input w-full" value={user?.displayName} />
-                <input name='authorEmail' type="text" className="input w-full" value={user?.email} />
-                <input name='authorPhoto' type="text" className="input w-full" value={user?.photoURL} />
+                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>My Info</label>
+                <input disabled name='authorName' type="text" className="input w-full" value={user?.displayName} />
+                <input disabled name='authorEmail' type="text" className="input w-full" value={user?.email} />
+                <input name='authorPhoto' type="text" className="input w-full hidden" value={user?.photoURL} />
 
                 <button className="btn btn-neutral mt-4">Publish</button>
             </div>
