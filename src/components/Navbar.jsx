@@ -50,7 +50,7 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <a className=" text-xl text-white">daisyUI</a>
+                    <Link to='/' className={`${darkMode?`text-white`:`text-black`} text-2xl font-bold`}>Rea<span className={`${darkMode? 'text-violet-300':'text-violet-700'} text-3xl `}>d</span>ora</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

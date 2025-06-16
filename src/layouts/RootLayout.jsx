@@ -14,7 +14,7 @@ const RootLayout = () => {
     // }
     return (
         <div>
-            <header className='relative'>
+            <header className='my-[76px]'>
                 <Navbar></Navbar>
             </header>
 

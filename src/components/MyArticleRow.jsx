@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
+    const {darkMode} = useAuth()
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = myData;
     // const {multi1, multi2} = tags
     
@@ -40,11 +42,11 @@ const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
             <th>{index + 1}</th>
             <td>{title}</td>
             <td>{content}</td>
-            <td>{
-            tags.map((tag, index)=><span key={index} className='badge badge-info mr-2'>{tag}</span>
+            <td className='hidden lg:block'>{
+            tags.map((tag, index)=><span key={index} className={`${darkMode?'text-white ':'text-black'} badge mr-2 mb-2 bg-violet-400/30`}>{tag}</span>
             )}</td>
             <td>{category}</td>
-            <td>{date}</td>
+            <td className='hidden md:block'>{date}</td>
             <td>
                 <button className='btn btn-accent' onClick={() => handleEdit(myData)}>Edit</button>
                 <button className='btn btn-error' onClick={() => handleDelete(_id)}>delete</button>

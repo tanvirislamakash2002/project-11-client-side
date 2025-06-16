@@ -4,6 +4,7 @@ import MyArticleRow from '../components/MyArticleRow';
 import UpdateModal from '../components/UpdateModal';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { GrArticle } from "react-icons/gr";
 
 const MyArticles = () => {
     // const { data } = useLoaderData()
@@ -45,108 +46,79 @@ const MyArticles = () => {
 
     }
 
+    // total likes count
+    const totalLikes = articles.reduce((sum, obj) => {
+        return sum + (obj.likedBy ? obj.likedBy.length : 0)
+    }, 0)
+
+
+
 
     return (
-        <div className='max-w-7xl w-11/12 mx-auto'>
-            <div className={`${darkMode?`text-white`:``} stats shadow flex flex-row-reverse`}>
-                <div className="stat">
-                    <div className="stat-figure">
-                        {/* <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            ></path>
-                        </svg> */}
-                    </div>
-                    <div className="">Total Likes</div>
-                    <div className="stat-value">25.6K
-                                             <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            ></path>
-                        </svg>
-                    </div>
-                    {/* <div className="stat-desc">21% more than last month</div> */}
-                </div>
+        <div className='max-w-7xl w-11/12 mx-auto mt-4 pb-4'>
+            <div className="pt-4">
+                <div className={`${darkMode ? `text-white` : ``} stats shadow flex flex-row-reverse bg-violet-500/10`}>
+                    <div className="stat">
 
-                <div className="stat">
-                    {/* <div className="stat-figure ">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"
-                            ></path>
-                        </svg>
-                    </div> */}
-                    <div className="">The number of articles</div>
-                    <div className="stat-value ">{articles?.length}
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"
-                            ></path>
-                        </svg>
+                        <div className="hidden md:block  lg:text-xl font-semibold">Total Likes</div>
+                        <div className="stat-value flex items-center mt-4">
+                            <p>{totalLikes}</p>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                className="inline-block h-8 w-8 stroke-current text-pink-400"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                ></path>
+                            </svg>
+                        </div>
+
                     </div>
 
-                    {/* <div className="stat-desc">21% more than last month</div> */}
-                </div>
+                    <div className="stat">
 
-                <div className="stat flex items-center">
-                    <div className="">
-                        <div className="avatar">
-                            <div className="w-26 rounded-xl">
-                                <img src={user?.photoURL} />
+                        <div className="hidden md:block lg:text-xl font-semibold">The number of articles</div>
+                        <div className="stat-value flex items-center gap-2">
+                            <p>{articles?.length}</p>
+
+                            <GrArticle className='text-violet-500' />
+                        </div>
+
+                    </div>
+
+                    <div className="stat flex items-center">
+                        <div className="">
+                            <div className="avatar">
+                                <div className="w-26 rounded-xl">
+                                    <img src={user?.photoURL} />
+                                </div>
                             </div>
                         </div>
+                        <div className="">
+                            <div className="stat-value text-3xl">{user?.displayName}</div>
+                            <div className=" text-2xl">{user?.email}</div>
+                        </div>
+
                     </div>
-                    <div className="">
-                        <div className="stat-value text-3xl">{user?.displayName}</div>
-                        <div className=" text-2xl">{user?.email}</div>
-                    </div>
-                    {/* <div className="stat-desc ">31 tasks remaining</div> */}
                 </div>
             </div>
 
-            <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+            <div className={`${darkMode ? 'text-white' : ''} overflow-x-auto rounded-box border border-base-content/5 bg-violet-700/10 mt-4`}>
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className={`${darkMode ? 'text-white' : ''}`}>
                         <tr>
                             <th></th>
                             <th>Title</th>
                             <th>Content</th>
-                            <th>Tags</th>
+                            <th className='hidden lg:block'>Tags</th>
                             <th>Category</th>
-                            <th>Date</th>
+                            <th className='hidden md:block'>Date</th>
                             <th></th>
                         </tr>
                     </thead>

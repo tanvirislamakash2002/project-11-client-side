@@ -67,7 +67,7 @@ const PostArticle = () => {
                 <input disabled name='authorEmail' type="text" className="input w-full" value={user?.email} />
                 <input name='authorPhoto' type="text" className="input w-full hidden" value={user?.photoURL} />
 
-                <button className="btn btn-neutral mt-4">Publish</button>
+                <button className="btn bg-violet-950 border-violet-800 text-white hover:bg-white hover:text-violet-900 mt-4 text-lg">Publish</button>
             </div>
         </form>
     );

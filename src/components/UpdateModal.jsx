@@ -54,25 +54,25 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
         <dialog id="my_modal_3" className="modal">
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             {/* <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>open modal</button> */}
-            <div className="modal-box max-w-xl mx-auto bg-slate-600/60">
+            <div className="modal-box max-w-xl mx-auto bg-violet-950/80">
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-2xl text-white bg-red-300 p-4">✕</button>
                 </form>
                 <div className=" w-full mx-auto">
                     <form method="dialog" onSubmit={handleEditArticle} className="mx-auto fieldset rounded-box w-md p-4">
-                        <h2 className='text-3xl font-bold text-center'>Post Article</h2>
+                        <h2 className='text-3xl font-bold text-center text-white'>Post Article</h2>
 
-                        <label className="label text-white text-lg">Title</label>
-                        <input name='title' value={title} type="text" className="input input-shadow w-full" placeholder="Give a title" onChange={handleChange} />
+                        <label className="label text-white text-lg font-bold">Title</label>
+                        <input name='title' value={title} type="text" className="input input-shadow w-full text-white font-semibold" placeholder="Give a title" onChange={handleChange} />
 
-                        <label className="label text-white text-lg">Content </label>
-                        <textarea name='content' value={content} className="textarea input-shadow w-full" placeholder="Content " onChange={handleChange}></textarea>
+                        <label className="label text-white text-lg font-bold">Content </label>
+                        <textarea name='content' value={content} className="textarea input-shadow w-full text-white font-semibold" placeholder="Content " onChange={handleChange}></textarea>
 
-                        <label className="label text-white text-lg">Category</label>
+                        <label className="label text-white text-lg font-bold">Category</label>
 
 
-                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}  className="select w-full select-shadow">
+                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}  className="select w-full select-shadow text-white font-semibold">
                             <option disabled={true}>Select Your Category</option>
                             <option value='Technology'>Technology</option>
                             <option value='Science'>Science</option>
@@ -80,21 +80,21 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                             <option value='Politics'>Politics</option>
                         </select>
 
-                        <label className="label text-white text-lg">Tags</label>
-                        <input name='tags' type="text" className="input w-full input-shadow" placeholder="Give a title"  onChange={handleChange} value={tags}/>
+                        <label className="label text-white text-lg font-bold">Tags</label>
+                        <input name='tags' type="text" className="input w-full input-shadow text-white" placeholder="Give a title"  onChange={handleChange} value={tags}/>
 
 
-                        <label className="label text-white text-lg">Thumbnail image</label>
-                        <input name='thumbnail' value={thumbnail} type="text" className="input input-shadow w-full" placeholder="Thumbnail image" onChange={handleChange} />
+                        <label className="label text-white text-lg font-bold">Thumbnail image</label>
+                        <input name='thumbnail' value={thumbnail} type="text" className="input input-shadow w-full text-white" placeholder="Thumbnail image" onChange={handleChange} />
 
-                        <label className="label text-white text-lg">Date</label>
-                        <input name='date' defaultValue={date} type="date" className="input select-shadow w-full" placeholder="" />
+                        <label className="label text-white text-lg font-bold">Date</label>
+                        <input name='date' defaultValue={date} type="date" className="input select-shadow w-full text-white" placeholder="" />
 
-                        <label className="label text-white text-lg">My Info</label>
-                        <input value={authorName} name='authorName' type="text" className="input w-full" />
-                        <input value={authorEmail} name='authorEmail' type="text" className="input w-full" />
+                        <label className="label text-white text-lg font-bold">My Info</label>
+                        <input disabled value={authorName} name='authorName' type="text" className="input w-full" />
+                        <input disabled value={authorEmail} name='authorEmail' type="text" className="input w-full" />
 
-                        <button className="btn btn-neutral mt-4">Edit Article</button>
+                        <button className="btn btn-neutral mt-4 text-lg">Edit Article</button>
                     </form>
                 </div>
                 <form method="dialog" className='flex justify-end'>
