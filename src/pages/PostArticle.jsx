@@ -12,18 +12,16 @@ const PostArticle = () => {
         const form = e.target;
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
-        // const { title, content, category, multi1, multi2, thumbnail, date, authorName, authorEmail } = data
 
         // process tags 
         const processTags = data.tags.split(',').map(tag=>tag.trim())
         data.tags=processTags
-        console.log(data)
 
 
 
         axios.post(`${import.meta.env.VITE_API_URL}/post-article`, data)
             .then(data => {
-                // console.log('data form axios',data)
+                
                 toast.success("Your Article Posted Successfully!");
                 form.reset()
             })
@@ -63,8 +61,8 @@ const PostArticle = () => {
                 <input name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>My Info</label>
-                <input disabled name='authorName' type="text" className="input w-full" value={user?.displayName} />
-                <input disabled name='authorEmail' type="text" className="input w-full" value={user?.email} />
+                <input name='authorName' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} value={user?.displayName} />
+                <input name='authorEmail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} value={user?.email} />
                 <input name='authorPhoto' type="text" className="input w-full hidden" value={user?.photoURL} />
 
                 <button className="btn bg-violet-950 border-violet-800 text-white hover:bg-white hover:text-violet-900 mt-4 text-lg">Publish</button>

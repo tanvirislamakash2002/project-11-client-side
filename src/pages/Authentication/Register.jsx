@@ -2,6 +2,7 @@
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const { createUser, updateUser, setUser } = useAuth()
@@ -16,18 +17,18 @@ const Register = () => {
         const data = Object.fromEntries(formData.entries())
         const { name, email, photo, password } = data
 
-        // if(password.length<=5){
-        //     alert('password must be more then 6 character');
-        //     return
-        // }
-        // else if(!/[A-Z]/.test(password)){
-        //     alert('password must contain an Uppercase latter');
-        //     return
-        // }
-        // else if(!/[a-z]/.test(password)){
-        //     alert('password must contain an lowercase latter');
-        //     return
-        // }
+        if(password.length<=5){
+            toast.error('password must be more then 6 character');
+            return
+        }
+        else if(!/[A-Z]/.test(password)){
+            toast.error('password must contain an Uppercase latter');
+            return
+        }
+        else if(!/[a-z]/.test(password)){
+            toast.error('password must contain an lowercase latter');
+            return
+        }
 
         createUser(email, password)
             .then(userCredential => {

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) => {
     // const [updateData, setUpdateData] = useState(selectedArticle)
-    const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = selectedArticle
+    const { _id, authorEmail, authorName, authorPhoto, category, content, date, tags, thumbnail, title } = selectedArticle
 
     const [selectedCategory, setSelectedCategory] = useState(category || '')
     useEffect(() => {
@@ -26,15 +26,15 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
         const formData = new FormData(form)
         const updateData = Object.fromEntries(formData.entries())
 
-        
+
         // process tags 
-        const processTags = updateData.tags.split(',').map(tag=>tag.trim())
-        updateData.tags=processTags
-// console.log(data)
+        const processTags = updateData.tags.split(',').map(tag => tag.trim())
+        updateData.tags = processTags
+        // console.log(data)
         axios.put(`${import.meta.env.VITE_API_URL}/edit-my-article/${_id}`, updateData)
             .then(data => {
 
-                toast.success("Your Article Posted Successfully!");
+                toast.success("Your Article Updated Successfully!");
                 updateData._id = _id
                 setSelectedArticle(updateData)
                 handleRowUpdate(updateData)
@@ -42,7 +42,7 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
             })
             .catch(error => {
                 console.log(error);
-                toast.error("Failed to add post!");
+                toast.error("Failed to Update post!");
 
             })
 
@@ -72,7 +72,7 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                         <label className="label text-white text-lg font-bold">Category</label>
 
 
-                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}  className="select w-full select-shadow text-white font-semibold">
+                        <select name='category' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="select w-full select-shadow text-white font-semibold">
                             <option disabled={true}>Select Your Category</option>
                             <option value='Technology'>Technology</option>
                             <option value='Science'>Science</option>
@@ -81,7 +81,7 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                         </select>
 
                         <label className="label text-white text-lg font-bold">Tags</label>
-                        <input name='tags' type="text" className="input w-full input-shadow text-white" placeholder="Give a title"  onChange={handleChange} value={tags}/>
+                        <input name='tags' type="text" className="input w-full input-shadow text-white" placeholder="Give a title" onChange={handleChange} value={tags} />
 
 
                         <label className="label text-white text-lg font-bold">Thumbnail image</label>
@@ -91,8 +91,10 @@ const UpdateModal = ({ selectedArticle, setSelectedArticle, handleRowUpdate }) =
                         <input name='date' defaultValue={date} type="date" className="input select-shadow w-full text-white" placeholder="" />
 
                         <label className="label text-white text-lg font-bold">My Info</label>
-                        <input disabled value={authorName} name='authorName' type="text" className="input w-full" />
-                        <input disabled value={authorEmail} name='authorEmail' type="text" className="input w-full" />
+
+                        <input name='authorName' type="text" className='input w-full input-shadow text-white' value={authorName} />
+                        <input name='authorEmail' type="text" className='input w-full input-shadow text-white' value={authorEmail} />
+                        <input name='authorPhoto' type="text" className="input w-full hidden" value={authorPhoto} />
 
                         <button className="btn btn-neutral mt-4 text-lg">Edit Article</button>
                     </form>
