@@ -29,7 +29,7 @@ const CategorySection = () => {
                             <img src="https://i.ibb.co/KkwnNMJ/105e10388.png" alt="" />
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-3xl font-bold leading-none">Technology</p>
+                            <p className="text-4xl font-bold leading-none">Technology</p>
                         </div>
                     </div>
                 </Link>
@@ -39,7 +39,7 @@ const CategorySection = () => {
                             <img src="https://i.ibb.co/prkRLDpg/8945728.png" alt="" />
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-3xl font-bold leading-none">Science</p>
+                            <p className="text-4xl font-bold leading-none">Science</p>
                         </div>
                     </div>
                 </Link>
@@ -49,7 +49,7 @@ const CategorySection = () => {
                             <img src="https://i.ibb.co/XZBNFZNk/sport12.png" alt="" />
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-3xl font-bold leading-none">Sports</p>
+                            <p className="text-4xl font-bold leading-none">Sports</p>
                         </div>
                     </div>
                 </Link>
@@ -59,7 +59,7 @@ const CategorySection = () => {
                             <img src="https://i.ibb.co/60cbrVNn/poli.png" alt="" />
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-3xl font-bold leading-none">Politics</p>
+                            <p className="text-4xl font-bold leading-none">Politics</p>
                         </div>
                     </div>
                 </Link>

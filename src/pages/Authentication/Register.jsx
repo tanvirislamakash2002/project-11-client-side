@@ -37,7 +37,7 @@ const Register = () => {
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
                         Swal.fire({
-                            title: 'what an alert',
+                            title: 'Registration Successful',
                             timer: '1400',
                             icon: 'success'
                         })
@@ -71,9 +71,9 @@ const Register = () => {
                             <label className="label">Password</label>
                             <input required name='password' type="password" className="input input-shadow" placeholder="Password" />
 
-                            <button className="btn btn-neutral mt-4">Register</button>
+                            <button className="btn bg-violet-950 text-white border-2 border-violet-950 hover:bg-white hover:text-violet-950 text-lg mt-4">Register</button>
                         </form>
-                        <p>Already have an account? Please <Link className='text-red-500 underline' to='/login' state={location.state}>Login Now</Link></p>
+                        <p>Already have an account? Please <Link className='text-red-500 underline font-semibold' to='/login' state={location.state}>Login Now</Link></p>
 
                     </fieldset>
                 </div>
