@@ -21,7 +21,7 @@ people can post an article. and see other persons articles. They can like others
  7. SweetAlert2
 
 # npm packages I have used:
-## Dependencies (Production packages)
+### Dependencies (Production packages)
 1. @tailwindcss/vite
 2. axios
 3. firebase
@@ -37,17 +37,17 @@ people can post an article. and see other persons articles. They can like others
 13. sweetalert2
 14. tailwindcss
 
-## DevDependencies (Development-only packages)
-1. @eslint/js - ESLint's default rules
-2. @types/react - TypeScript definitions for React
-3. @types/react-dom - TypeScript definitions for React DOM
-4. @vitejs/plugin-react - Vite plugin for React support
-5. daisyui - Tailwind CSS component library
-6. eslint - JavaScript/TypeScript linter
-7. eslint-plugin-react-hooks - ESLint rules for React Hooks
-8. eslint-plugin-react-refresh - ESLint plugin for React Refresh
-9. globals - Global variables for ESLint
-10. vite - Fast frontend build tool\
+### DevDependencies (Development-only packages)
+1. @eslint/js
+2. @types/react
+3. @types/react-dom
+4. @vitejs/plugin-react
+5. daisyui
+6. eslint
+7. eslint-plugin-react-hooks
+8. eslint-plugin-react-refresh
+9. globals
+10. vite
 
 # How to Run (Setup):
 1. Clone the repo - git clone
