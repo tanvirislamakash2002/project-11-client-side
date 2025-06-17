@@ -9,7 +9,7 @@ const ArticleCard = ({ articleData }) => {
     const { _id, authorEmail, authorName, category, content, date, tags, thumbnail, title } = articleData
     // console.log(articleData)
     return (
-        <div className="card bg-violet-400/20 max-w-96 shadow-sm flex flex-col h-full mx-auto">
+        <div className="card bg-violet-400/20 max-w-96 w-full shadow-sm flex flex-col h-full mx-auto">
             <figure className="px-4 pt-4">
                 <img
                     src={thumbnail}

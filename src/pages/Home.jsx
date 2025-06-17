@@ -27,7 +27,7 @@ const Home = () => {
     }, [])
     // console.log(allArticlesData)
     return (
-        <div>
+        <div className='pb-14'>
             <div>
                 <Banner></Banner>
             </div>

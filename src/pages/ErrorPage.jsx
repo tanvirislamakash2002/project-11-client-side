@@ -14,7 +14,7 @@ const ErrorPage = () => {
                 <Lottie animationData={errorAnimation} loop={true} style={{ width: '400px' }}></Lottie>
             </div>
             <div className="flex justify-center">
-                <Link to='/'><button className='btn btn-success mx-auto'>Back To Home</button></Link>
+                <Link to='/'><button className='btn bg-green-700 text-white hover:bg-green-500 mx-auto'>Back To Home</button></Link>
             </div>
         </div>
     );

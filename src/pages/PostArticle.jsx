@@ -32,7 +32,7 @@ const PostArticle = () => {
             })
     }
     return (
-        <form onSubmit={handlePostArticle} className={`${darkMode?'text-white':''} flex items-center justify-center min-h-screen`}>
+        <form onSubmit={handlePostArticle} className={`${darkMode?'text-white':''} flex items-center justify-center min-h-[calc(100vh-352px)]`}>
             <div className=" fieldset bg-violet-600/20 border-base-300/30 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
                 <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
@@ -52,10 +52,10 @@ const PostArticle = () => {
                 </select>
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Tags</label>
-                <input name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
+                <input name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give some tags (separate with commas ',' )" />
  
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Thumbnail image</label>
-                <input name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Thumbnail image" />
+                <input name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give your thumbnails URL" />
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Date</label>
                 <input name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
