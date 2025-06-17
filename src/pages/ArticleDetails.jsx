@@ -36,11 +36,11 @@ const ArticleDetails = () => {
                 authorEmail: user?.email
             })
                 .then(data => {
-                    console.log(data?.data)
+                    // console.log(data?.data)
                     const isLiked = data?.data?.liked
                     setLiked(isLiked)
                     setLikeCount(prev => (isLiked ? prev + 1 : prev - 1))
-                    isLiked?toast.success('You have liked the article'):toast.warning('You have disliked the article')
+                    isLiked ? toast.success('You have liked the article') : toast.warning('You have disliked the article')
                 })
                 .catch(error => {
                     console.log(error)
@@ -59,18 +59,23 @@ const ArticleDetails = () => {
         e.preventDefault()
         const comment = e.target.comment.value;
         const commentData = { article_id: _id, commenter_name: user?.displayName, commenter_photo: user?.photoURL, comment }
-        console.log(commentData)
-        axios.post(`${import.meta.env.VITE_API_URL}/comment-article`, commentData)
-            .then(data => {
-                setComments([...comments, commentData])
-                // console.log('data form axios',data)
-                toast.success("Comment added Successfully!");
-            })
-            .catch(error => {
-                console.log(error);
-                toast.error("Failed to comment!");
 
-            })
+        if (user) {
+            axios.post(`${import.meta.env.VITE_API_URL}/comment-article`, commentData)
+                .then(data => {
+                    setComments([...comments, commentData])
+                    // console.log('data form axios',data)
+                    toast.success("Comment added Successfully!");
+                })
+                .catch(error => {
+                    console.log(error);
+                    toast.error("Failed to comment!");
+
+                })
+        }
+        else {
+            return navigate('/login')
+        }
     }
 
 
@@ -87,9 +92,9 @@ const ArticleDetails = () => {
         }
 
     }, [_id])
-    // console.log(comments)
+    // console.log(liked)
     return (
-        <div className={`${darkMode?'text-white':''} py-16 flex flex-col items-center`}>
+        <div className={`${darkMode ? 'text-white' : ''} py-16 flex flex-col items-center`}>
             <div className="card w-96 bg-violet-700/30 shadow-sm mx-auto">
                 <div className="card-body">
                     <div><img src={thumbnail} alt="" /></div>
@@ -120,11 +125,11 @@ const ArticleDetails = () => {
 
                     <div className="flex justify-between">
                         <div className="mt-6 flex items-center gap-2">
-                            <button className={`${liked?'text-red-900 bg-red-300 hover:bg-red-900 hover:text-red-300':'text-green-900 bg-green-300 hover:bg-green-900 hover:text-green-300'} btn rounded-full text-xl border-0 `} onClick={handleLike}>{liked ? <BiDislike /> : <BiLike />}</button>
+                            <button className={`${liked ? 'text-red-900 bg-red-300 hover:bg-red-900 hover:text-red-300' : 'text-green-900 bg-green-300 hover:bg-green-900 hover:text-green-300'} btn rounded-full text-xl border-0 `} onClick={handleLike}>{liked ? <BiDislike /> : <BiLike />}</button>
                             <p className='text-sm font-semibold'>Liked by <span className='badge'>{likeCount}</span></p>
                         </div>
                         <div className="mt-6 flex items-center gap-2">
-                             <p className='text-sm font-semibold'><span className='badge bg-violet-700 text-white border-0'>{comments.length}</span> comments</p>
+                            <p className='text-sm font-semibold'><span className='badge bg-violet-700 text-white border-0'>{comments.length}</span> comments</p>
                             <button className="btn btn-primary">{<FaRegComment />}</button>
                         </div>
                     </div>
@@ -137,19 +142,19 @@ const ArticleDetails = () => {
                 </div>
 
             </div>
-                {
-                    comments.map(comment => <div key={comment._id} className="card bg-violet-500/50 w-96 mt-2 ">
-                        <div className="card-body">
-                            <div className="avatar items-center gap-5">
-                                <div className="mask mask-squircle w-14">
-                                    <img src={comment.commenter_photo} />
-                                </div>
-                            <p className='font-semibold text-lg'>{comment.commenter_name}</p>
+            {
+                comments.map(comment => <div key={comment._id} className="card bg-violet-500/50 w-96 mt-2 ">
+                    <div className="card-body">
+                        <div className="avatar items-center gap-5">
+                            <div className="mask mask-squircle w-14">
+                                <img src={comment.commenter_photo} />
                             </div>
-                            <p className='text-lg border-t-2 border-dashed border-violet-400'>{comment.comment}</p>
+                            <p className='font-semibold text-lg'>{comment.commenter_name}</p>
                         </div>
-                    </div>)
-                }
+                        <p className='text-lg border-t-2 border-dashed border-violet-400'>{comment.comment}</p>
+                    </div>
+                </div>)
+            }
         </div>
     );
 };

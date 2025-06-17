@@ -37,10 +37,10 @@ const PostArticle = () => {
                 <h2 className='text-3xl font-bold text-center'>Post Article</h2>
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Title</label>
-                <input name='title' type="text" className={`${darkMode?'text-white placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
+                <input required name='title' type="text" className={`${darkMode?'text-white placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Content </label>
-                <textarea name='content' className={`${darkMode?'text-white placeholder-white':''} textarea w-full input-shadow `} placeholder="Write your Content here"></textarea>
+                <textarea required name='content' className={`${darkMode?'text-white placeholder-white':''} textarea w-full input-shadow `} placeholder="Write your Content here"></textarea>
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Category</label>
                 <select name='category' defaultValue="Random" className="select w-full select-shadow font-semibold">
@@ -52,13 +52,13 @@ const PostArticle = () => {
                 </select>
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Tags</label>
-                <input name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give some tags (separate with commas ',' )" />
+                <input required name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give some tags (separate with commas ',' )" />
  
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Thumbnail image</label>
-                <input name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give your thumbnails URL" />
+                <input required name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give your thumbnails URL" />
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Date</label>
-                <input name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
+                <input required name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
 
                 <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>My Info</label>
                 <input name='authorName' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} value={user?.displayName} />

@@ -15,7 +15,7 @@ const ArticlesFilterByCategory = () => {
                 <Link to='/filter-by-category/Sports' className={`${location.pathname === '/filter-by-category/Sports' ? 'bg-violet-400 text-white' : 'bg-violet-100'} btn join-item border-0`}>Sports</Link>
                 <Link to='/filter-by-category/Politics' className={`${location.pathname === '/filter-by-category/Politics' ? 'bg-violet-400 text-white' : 'bg-violet-100'} btn join-item border-0`}>Politics</Link>
             </div>
-            <div className="grid grid-cols-3 gap-8 py-14 w-11/12 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-14 w-11/12 mx-auto">
                 {
                     data.map(articleData => <ArticleCard articleData={articleData}></ArticleCard>)
                 }

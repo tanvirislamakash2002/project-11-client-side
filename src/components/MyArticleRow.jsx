@@ -23,7 +23,7 @@ const MyArticleRow = ({ myData, index, handleEdit, removeDataFromTable }) => {
             if (result.isConfirmed) {
                 axios.delete(`${import.meta.env.VITE_API_URL}/dlt-my-article/${id}`)
                     .then(data => {
-                        console.log(data.data)
+                        // console.log(data.data)
                         if (data.data.deletedCount > 0) {
                             removeDataFromTable(_id)
                             Swal.fire({

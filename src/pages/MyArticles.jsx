@@ -23,12 +23,11 @@ const MyArticles = () => {
                 console.log(error)
             })
     }, [axiosSecure, user])
-    // console.log(articles)
 
 
     const removeDataFromTable = (id) => {
         const filterData = articles.filter(article => article._id !== id)
-        console.log('what a data', filterData)
+        
         setArticles(filterData)
     }
     const handleEdit = (articleData) => {

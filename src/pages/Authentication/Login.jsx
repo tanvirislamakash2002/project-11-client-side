@@ -16,7 +16,7 @@ const Login = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Your work has been saved",
+                    title: "You have successfully logged in with google",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -39,7 +39,7 @@ const Login = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Your work has been saved",
+                    title: "You have successfully logged in",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -47,7 +47,7 @@ const Login = () => {
             })
             .catch(error => {
                 Swal.fire({
-                    title: `failed to register ${error.message}`,
+                    title: `failed to login ${error.message}`,
                     timer: '1400',
                     icon: 'success'
                 })

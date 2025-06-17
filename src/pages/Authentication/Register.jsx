@@ -32,7 +32,6 @@ const Register = () => {
 
         createUser(email, password)
             .then(userCredential => {
-                console.log(userCredential)
                 const user = userCredential.user
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
