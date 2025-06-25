@@ -69,7 +69,7 @@ people can post an article. and see other persons articles. They can like others
 
 
 
-# React + Vite + me
+# React + Vite 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
