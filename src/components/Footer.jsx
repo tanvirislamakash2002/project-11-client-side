@@ -20,15 +20,17 @@ const Footer = () => {
                     <h6 className="footer-title">Explore</h6>
                     <Link to='/' className="link link-hover">Home</Link>
                     <Link to='/allArticles' className="link link-hover">All Articles</Link>
-                    <Link to={`/myArticles/${user?.email}`} className="link link-hover">My Articles</Link>
-                    <Link to='/postArticle' className="link link-hover">Post Articles</Link>
+                    <Link to={`/about-us`} className="link link-hover">About Us</Link>
+                    <Link to='/contact-us' className="link link-hover">Contact Us</Link>
+                    {/* <Link to={`/myArticles/${user?.email}`} className="link link-hover">My Articles</Link>
+                    <Link to='/postArticle' className="link link-hover">Post Articles</Link> */}
                 </nav>
-                <nav>
+                {/* <nav>
                     <h6 className="footer-title">Legal</h6>
                     <a className="link link-hover">About Us</a>
                     <a className="link link-hover">Contact Us</a>
                     <a className="link link-hover">Terms & Conditions</a>
-                </nav>
+                </nav> */}
                 <nav>
                     <h6 className="footer-title">Social Links</h6>
                     <div className="flex gap-3">

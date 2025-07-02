@@ -15,6 +15,8 @@ import ArticlesFilterByCategory from "../pages/ArticlesFilterByCategory";
 import PrivateRoute from "../provider/PrivateRoute";
 import ErrorPage from "../pages/ErrorPage";
 import AnimatedOutlet from "../pages/Authentication/AnimatedOutlet";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
 
 
 const router = createBrowserRouter([
@@ -64,6 +66,14 @@ const router = createBrowserRouter([
                 loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/filter-by-category/${params.category}`),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <ArticlesFilterByCategory></ArticlesFilterByCategory>
+            },
+            {
+                path:'/about-us',
+                element:<AboutUs></AboutUs>
+            },
+            {
+                path:'/contact-us',
+                element:<ContactUs></ContactUs>
             }
         ]
     },

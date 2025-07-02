@@ -8,13 +8,13 @@ import useAuth from '../hooks/useAuth';
 
 const RootLayout = () => {
     const navigation = useNavigation()
-    const {darkMode} = useAuth()
+    const {darkMode, user} = useAuth()
     // if(navigation.state==='loading'){
     //     return <Loading></Loading>
     // }
     return (
         <div>
-            <header className='my-[76px]'>
+            <header className={user?'my-[76px]':'my-[65px]'}>
                 <Navbar></Navbar>
             </header>
 
