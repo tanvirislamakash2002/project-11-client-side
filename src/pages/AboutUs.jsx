@@ -10,7 +10,7 @@ const AboutUs = () => {
       <div className="hero bg-[#be5fe6] text-white">
         <div className="hero-content text-center py-12">
           <div className="max-w-4xl">
-            <h1 className="text-5xl font-bold mb-6">About Our Knowledge Community</h1>
+            <h1 className="text-5xl font-bold mb-6">About Our Readora Community</h1>
             <p className="text-xl py-6">
               We're building a platform where curious minds meet to share, learn, and grow together. 
               Our mission is to democratize knowledge and make wisdom accessible to everyone.

@@ -95,33 +95,37 @@ const ArticleDetails = () => {
     // console.log(liked)
     return (
         <div className={`${darkMode ? 'text-white' : ''} py-16 flex flex-col items-center`}>
-            <div className="card w-96 bg-violet-700/30 shadow-sm mx-auto">
+            <div className="card w-sm md:w-xl lg:w-3xl bg-violet-700/30 shadow-sm">
                 <div className="card-body">
-                    <div><img src={thumbnail} alt="" /></div>
-                    <div className="">
-                        <h2 className="text-3xl font-bold">{title}</h2>
-                        {/* <span className="text-xl">{date}</span> */}
-                        <p>{content}</p>
-                    </div>
-                    <p className="text-xl"><span className='font-semibold'>Category:</span> {category}</p>
-                    <div className='flex flex-wrap'>
+                    <div className="flex flex-col md:flex-row gap-5">
+                        <div className='flex-1'><img src={thumbnail} alt="" className='rounded-xl' /></div>
+                        <div className="flex-1">
+                            <div className='flex gap-5 items-center'>
+                                <div className="avatar">
+                                    <div className="w-24 rounded-full">
+                                        <img src={authorPhoto} />
+                                    </div>
+                                </div>
+                                {/* <img src={authorPhoto} alt="" /> */}
+                                <div className="">
+                                    <p className="text-xl flex items-center gap-2"><FaRegUser />{authorName}</p>
+                                    <p className="text-lg flex items-center gap-2"><MdOutlineDateRange />{date}</p>
+                                </div>
+                            </div>
+                            <p className="text-xl"><span className='font-semibold'>Category:</span> {category}</p>
+                            <div className='flex flex-wrap'>
 
-                        {
-                            tags.map((tag, index) => <span key={index} className='mr-2 mb-2 block badge  bg-violet-500 text-white border-violet-900'>{tag}</span>)
-                        }
-                    </div>
-                    <div className='flex gap-5 items-center'>
-                        <div className="avatar">
-                            <div className="w-24 rounded-full">
-                                <img src={authorPhoto} />
+                                {
+                                    tags.map((tag, index) => <span key={index} className='mr-2 mb-2 block badge  bg-violet-500 text-white border-violet-900'>{tag}</span>)
+                                }
                             </div>
                         </div>
-                        {/* <img src={authorPhoto} alt="" /> */}
-                        <div className="">
-                            <p className="text-xl flex items-center gap-2"><FaRegUser />{authorName}</p>
-                            <p className="text-lg flex items-center gap-2"><MdOutlineDateRange />{date}</p>
-                        </div>
                     </div>
+                            <div className="">
+                                <h2 className="text-3xl font-bold">{title}</h2>
+                                {/* <span className="text-xl">{date}</span> */}
+                                <p>{content}</p>
+                            </div>
 
                     <div className="flex justify-between">
                         <div className="mt-6 flex items-center gap-2">
@@ -143,7 +147,7 @@ const ArticleDetails = () => {
 
             </div>
             {
-                comments.map(comment => <div key={comment._id} className="card bg-violet-500/50 w-96 mt-2 ">
+                comments.map(comment => <div key={comment._id} className="card bg-violet-500/50  w-sm md:w-xl lg:w-3xl mt-2 ">
                     <div className="card-body">
                         <div className="avatar items-center gap-5">
                             <div className="mask mask-squircle w-14">

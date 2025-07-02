@@ -8,7 +8,7 @@ const ContactUs = () => {
       <div className="hero bg-[#be5fe6] text-white">
         <div className="hero-content text-center py-12">
           <div className="max-w-4xl">
-            <h1 className="text-5xl font-bold mb-6">Contact Our Knowledge Community</h1>
+            <h1 className="text-5xl font-bold mb-6">Contact Our Readora Community</h1>
             <p className="text-xl py-6">
               Have questions, suggestions, or feedback? We'd love to hear from you! 
               Reach out through any of the channels below or send us a message directly.
