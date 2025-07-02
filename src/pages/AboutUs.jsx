@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen bg-base-100/50">
       {/* Hero Section */}
       <div className="hero bg-[#be5fe6] text-white">
         <div className="hero-content text-center py-12">
@@ -50,7 +50,7 @@ const AboutUs = () => {
       </div>
 
       {/* Our Values */}
-      <div className="bg-base-200 py-16">
+      <div className="bg-base-200/50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Our Core Values</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -112,5 +112,6 @@ const AboutUs = () => {
     </div>
   );
 };
+
 
 export default AboutUs;
