@@ -1,7 +1,7 @@
-
 import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
+import { FaTachometerAlt } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, signOutUser, darkMode, setDarkMode } = useAuth()
@@ -15,7 +15,7 @@ const Navbar = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Your work has been saved",
+                    title: "Logged out successfully",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -26,104 +26,279 @@ const Navbar = () => {
             })
     }
 
-
     const links = <>
+        <li>
+            <NavLink
+                to={'/'}
+                className={({ isActive }) =>
+                    `px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                    ${isActive ? 'bg-primary text-primary-content' :
+                        darkMode ? 'text-violet-200 hover:bg-violet-900/50' : 'text-violet-700 hover:bg-violet-100'}`}
+            >
+                Home
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/allArticles'}
+                className={({ isActive }) =>
+                    `px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                    ${isActive ? 'bg-primary text-primary-content' :
+                        darkMode ? 'text-violet-200 hover:bg-violet-900/50' : 'text-violet-700 hover:bg-violet-100'}`}
+            >
+                All Articles
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/about-us'}
+                className={({ isActive }) =>
+                    `px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                    ${isActive ? 'bg-primary text-primary-content' :
+                        darkMode ? 'text-violet-200 hover:bg-violet-900/50' : 'text-violet-700 hover:bg-violet-100'}`}
+            >
+                About Us
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/contact-us'}
+                className={({ isActive }) =>
+                    `px-4 py-2 rounded-lg transition-all duration-200 font-medium
+                    ${isActive ? 'bg-primary text-primary-content' :
+                        darkMode ? 'text-violet-200 hover:bg-violet-900/50' : 'text-violet-700 hover:bg-violet-100'}`}
+            >
+                Contact Us
+            </NavLink>
+        </li>
 
-
-
-        <li><NavLink to={'/'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] mr-2 hover:bg-[#be5fe6] hover:text-white`}>Home</NavLink></li>
-        <li><NavLink to={'/allArticles'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] hover:bg-[#be5fe6] hover:text-white mr-2`}>All Articles</NavLink></li>
-        <li><NavLink to={'/about-us'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] mr-2 hover:bg-[#be5fe6] hover:text-white`}>About Us</NavLink></li>
-        <li><NavLink to={'/contact-us'} className={` text-lg text-[#be5fe6] font-semibold bg-[#be5fe626] hover:bg-[#be5fe6] hover:text-white`}>Contact Us</NavLink></li>
-
+        <li>
+            <Link
+                to="/dashboard"
+                className={
+                    `px-4 py-2 rounded-lg transition-all duration-200 font-medium flex items-center text-primary-content
+                    ${darkMode ? 'text-violet-200 bg-violet-700 hover:bg-violet-900/50' : 'text-violet-100 hover:text-violet-800 hover:bg-violet-100 bg-violet-950'}`}
+            >
+                <FaTachometerAlt />
+                Dashboard
+            </Link>
+        </li>
     </>
+
     return (
-        <div className={`${darkMode ? 'bg-[#191a1d]' : 'bg-violet-100/90'} fixed inset-x-0 top-0 z-50`}>
-            <div className="max-w-7xl navbar mx-auto">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+        <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} fixed inset-x-0 top-0 z-50 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} shadow-sm`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    {/* Left side - Logo and links */}
+                    <div className="flex items-center">
+                        <Link to='/' className="flex-shrink-0 flex items-center">
+                            <span className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                Rea<span className={`${darkMode ? 'text-primary' : 'text-primary'} text-3xl`}>d</span>ora
+                            </span>
+                        </Link>
+
+
+                        <div className="hidden md:block ml-10">
+                            <ul className="flex items-center">
+                                {links}
+
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            {links}
-
-                        </ul>
                     </div>
-                    <Link to='/' className={`${darkMode?`text-white`:`text-black`} text-2xl font-bold`}>Rea<span className={`${darkMode? 'text-violet-300':'text-violet-700'} text-3xl `}>d</span>ora</Link>
-                </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        {links}
 
-                    </ul>
-                </div>
-                <div className="navbar-end">
-                    <label className={`${darkMode ? 'text-white' : ''} mr-7 swap swap-rotate`}>
-                        {/* this hidden checkbox controls the state */}
-                        <input type="checkbox" onClick={() => setDarkMode(!darkMode)} />
+                    {/* Right side - Theme toggle and user area */}
+                    <div className="flex items-center space-x-4">
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={() => setDarkMode(!darkMode)}
+                            className={`p-2 rounded-full focus:outline-none ${darkMode ? 'text-yellow-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-200'}`}
+                            aria-label="Toggle dark mode"
+                        >
+                            {darkMode ? (
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                </svg>
+                            ) : (
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                </svg>
+                            )}
+                        </button>
 
-                        {/* sun icon */}
-                        <svg
-                            className={`${!darkMode && `hidden`} swap-on h-10 w-10 fill-current`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-                        </svg>
-
-                        {/* moon icon */}
-                        <svg
-                            className={`${darkMode && `hidden`} swap-off h-10 w-10 fill-current`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-                        </svg>
-                    </label>
-                    {user ?
-                        <>
-                            <div className="bg-base-100 shadow-sm rounded-full">
-                                <div className="flex gap-2">
-                                    <div className="dropdown dropdown-end">
-                                        <div tabIndex={0} role="button" className="avatar">
-                                            <div className="w-15 rounded-full">
-                                                <img
-                                                    alt="Tailwind CSS Navbar component"
-                                                    src={user.photoURL && user.photoURL} />
-                                            </div>
+                        {/* User Area */}
+                        {user ? (
+                            <div className="ml-4 relative">
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="avatar">
+                                        <div className="w-10 h-10 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100 overflow-hidden">
+                                            <img
+                                                alt="User profile"
+                                                src={user.photoURL || 'https://www.gravatar.com/avatar?d=mp'}
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
-                                        <ul
-                                            tabIndex={0}
-                                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                            <li><Link to={`myArticles/${user.email}`}>My Articles</Link></li>
-                                            <li><Link to='postArticle'>Post Article</Link></li>
-                                            <li onClick={handleSignOut} className='font-bold text-red-400'><a>Logout</a></li>
-                                        </ul>
                                     </div>
+                                    <ul
+                                        tabIndex={0}
+                                        className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 border ${darkMode
+                                            ? 'bg-gray-800 border-gray-700 text-gray-100'
+                                            : 'bg-white border-gray-200 text-gray-800'
+                                            }`}
+                                    >
+                                        <li className={`px-4 py-2 text-sm font-medium border-b ${darkMode
+                                            ? 'border-gray-700 text-white'
+                                            : 'border-gray-200 text-gray-900'
+                                            }`}>
+                                            <span className="truncate">{user.displayName || user.email}</span>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to={`/dashboard/profile`}
+                                                className={darkMode
+                                                    ? 'hover:bg-gray-700 text-gray-100'
+                                                    : 'hover:bg-gray-100 text-gray-800'
+                                                }
+                                            >
+                                                My Profile
+                                            </Link>
+                                        </li>
+
+                                        <li>
+                                            <button
+                                                onClick={handleSignOut}
+                                                className={`${darkMode
+                                                    ? 'text-red-400 hover:bg-red-900/20'
+                                                    : 'text-red-500 hover:bg-red-50'
+                                                    }`}
+                                            >
+                                                Logout
+                                            </button>
+                                        </li>
+
+                                    </ul>
                                 </div>
                             </div>
-                        </>
-                        :
-                        <>
-                            {/* <Link to='/login' className='btn'>Login</Link>
-                            <Link to='/register' state={location.state} className='btn'>Register</Link> */}
+                        ) : (
+                            <div className="flex space-x-2">
+                                <Link
+                                    to='/login'
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${darkMode ? 'text-violet-300 hover:bg-violet-900/50' : 'text-primary hover:bg-violet-100'}`}
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to='/register'
+                                    state={location.state}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${darkMode ? 'bg-primary hover:bg-primary-focus text-primary-content' : 'bg-primary hover:bg-primary-focus text-white'}`}
+                                >
+                                    Register
+                                </Link>
+                            </div>
+                        )}
+                    </div>
 
-                            <Link to='/login' className="relative inline-block text-lg group">
-                                <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-violet-800 transition-colors duration-300 ease-out border-2 border-violet-900 rounded-lg group-hover:text-white">
-                                    <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-violet-50"></span>
-                                    <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-violet-900 group-hover:-rotate-180 ease"></span>
-                                    <span className="relative">Login</span>
-                                </span>
-                                <span className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-violet-900 rounded-lg group-hover:mb-0 group-hover:mr-0" data-rounded="rounded-lg"></span>
-                            </Link>
-                        </>
-                    }
+                    {/* Mobile menu button */}
+                    <div className="md:hidden ml-4 text-violet-500">
+                        <button
+                            className="btn btn-ghost btn-square"
+                            onClick={() => document.getElementById('mobile-menu').classList.toggle('hidden')}
+                        >
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            {/* Mobile menu */}
+            <div id="mobile-menu" className="md:hidden hidden">
+                <div className={`px-2 pt-2 pb-3 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+                    <ul className="flex flex-col space-y-1">
+                        <li className="w-full">
+                            <NavLink
+                                to={'/'}
+                                className={({ isActive }) =>
+                                    `block w-full px-4 py-3 rounded-md transition-all duration-200 font-medium
+                        ${isActive ? 'bg-primary text-primary-content' :
+                                        darkMode ? 'text-violet-200 hover:bg-violet-900/70' : 'text-violet-700 hover:bg-violet-100'}`
+                                }
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className="w-full">
+                            <NavLink
+                                to={'/allArticles'}
+                                className={({ isActive }) =>
+                                    `block w-full px-4 py-3 rounded-md transition-all duration-200 font-medium
+                        ${isActive ? 'bg-primary text-primary-content' :
+                                        darkMode ? 'text-violet-200 hover:bg-violet-900/70' : 'text-violet-700 hover:bg-violet-100'}`
+                                }
+                            >
+                                All Articles
+                            </NavLink>
+                        </li>
+                        <li className="w-full">
+                            <NavLink
+                                to={'/about-us'}
+                                className={({ isActive }) =>
+                                    `block w-full px-4 py-3 rounded-md transition-all duration-200 font-medium
+                        ${isActive ? 'bg-primary text-primary-content' :
+                                        darkMode ? 'text-violet-200 hover:bg-violet-900/70' : 'text-violet-700 hover:bg-violet-100'}`
+                                }
+                            >
+                                About Us
+                            </NavLink>
+                        </li>
+                        <li className="w-full">
+                            <NavLink
+                                to={'/contact-us'}
+                                className={({ isActive }) =>
+                                    `block w-full px-4 py-3 rounded-md transition-all duration-200 font-medium
+                        ${isActive ? 'bg-primary text-primary-content' :
+                                        darkMode ? 'text-violet-200 hover:bg-violet-900/70' : 'text-violet-700 hover:bg-violet-100'}`
+                                }
+                            >
+                                Contact Us
+                            </NavLink>
+                        </li>
+                        <li>
+                            <Link
+                                to="/dashboard"
+                                className={`
+      flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200
+      ${darkMode
+                                        ?'text-violet-200 hover:bg-violet-100/30 bg-violet-100/40': 'text-violet-800 hover:bg-violet-900/20 bg-violet-900/20'
+                                        }
+      hover:underline
+    `}
+                            >
+                                <FaTachometerAlt />
+                                Dashboard
+                            </Link>
+                        </li>
+                    </ul>
+                    {!user && (
+                        <div className={`pt-2 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                            <Link
+                                to='/login'
+                                className="block w-full px-4 py-3 my-1 rounded-md text-center font-medium bg-primary text-primary-content"
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                to='/register'
+                                state={location.state}
+                                className={`block w-full px-4 py-3 my-1 rounded-md text-center font-medium border ${darkMode ? 'border-primary text-primary hover:bg-primary hover:text-primary-content' : 'border-primary text-primary hover:bg-primary hover:text-white'}`}
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div >
     );
 };
 

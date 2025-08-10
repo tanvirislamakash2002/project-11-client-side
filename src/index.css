@@ -4,6 +4,54 @@
     themes: light --default
 }
 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #7E22CE;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #C026D3;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #A855F7;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #3D4451;
+  --color-neutral-content: #ffffff;
+
+  --color-base-100: #FAF5FF;
+  --color-base-200: #E9D5FF;
+  --color-base-content: #1F1F1F;
+
+  --color-info: #3B82F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: #8B5CF6;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #D946EF;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #A855F7;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #1E1B2E;
+  --color-neutral-content: #E9D8FD;
+
+  --color-base-100: #1A103D;
+  --color-base-200: #2E1B5B;
+  --color-base-content: #E9D8FD;
+
+  --color-info: #3B82F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
 /* custom css */
 .input-shadow {
     box-shadow:

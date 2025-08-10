@@ -3,72 +3,163 @@ import useAuth from '../hooks/useAuth';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-
 const PostArticle = () => {
-    const { user, darkMode } = useAuth()
+  const { user, darkMode } = useAuth();
 
-    const handlePostArticle = (e) => {
-        e.preventDefault()
-        const form = e.target;
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
+  const handlePostArticle = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-        // process tags 
-        const processTags = data.tags.split(',').map(tag=>tag.trim())
-        data.tags=processTags
+    // Process tags
+    data.tags = data.tags.split(',').map((tag) => tag.trim());
 
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/post-article`, data)
+      .then(() => {
+        toast.success('Your Article Posted Successfully!');
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('Failed to add post!');
+      });
+  };
 
+  return (
+    <div
+      className={`flex items-center justify-center min-h-[calc(100vh-120px)] px-4 ${
+        darkMode ? 'bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <form
+        onSubmit={handlePostArticle}
+        className={`w-full max-w-2xl p-8 rounded-xl shadow-lg border ${
+          darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}
+      >
+        <h2
+          className={`text-3xl font-bold mb-6 text-center ${
+            darkMode ? 'text-white' : 'text-gray-800'
+          }`}
+        >
+          Post Article
+        </h2>
 
-        axios.post(`${import.meta.env.VITE_API_URL}/post-article`, data)
-            .then(data => {
-                
-                toast.success("Your Article Posted Successfully!");
-                form.reset()
-            })
-            .catch(error => {
-                console.log(error);
-                toast.error("Failed to add post!");
+        {/* Title */}
+        <label className="block font-semibold mb-1">Title</label>
+        <input
+          required
+          name="title"
+          type="text"
+          className={`input input-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white placeholder-gray-300' : ''
+          }`}
+          placeholder="Give a title"
+        />
 
-            })
-    }
-    return (
-        <form onSubmit={handlePostArticle} className={`${darkMode?'text-white':''} flex items-center justify-center min-h-[calc(100vh-352px)]`}>
-            <div className=" fieldset bg-violet-600/20 border-base-300/30 rounded-box w-lg border p-4 lg:mx-2 mx-4 my-4">
-                <h2 className='text-3xl font-bold text-center'>Post Article</h2>
+        {/* Content */}
+        <label className="block font-semibold mb-1">Content</label>
+        <textarea
+          required
+          name="content"
+          className={`textarea textarea-bordered w-full h-32 mb-4 ${
+            darkMode ? 'bg-gray-700 text-white placeholder-gray-300' : ''
+          }`}
+          placeholder="Write your content here"
+        ></textarea>
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Title</label>
-                <input required name='title' type="text" className={`${darkMode?'text-white placeholder-white':''} input w-full input-shadow`} placeholder="Give a title" />
+        {/* Category */}
+        <label className="block font-semibold mb-1">Category</label>
+        <select
+          name="category"
+          defaultValue="Random"
+          className={`select select-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white' : ''
+          }`}
+        >
+          <option value="Random" disabled>
+            Select Your Category
+          </option>
+          <option>Technology</option>
+          <option>Science</option>
+          <option>Sports</option>
+          <option>Politics</option>
+        </select>
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Content </label>
-                <textarea required name='content' className={`${darkMode?'text-white placeholder-white':''} textarea w-full input-shadow `} placeholder="Write your Content here"></textarea>
+        {/* Tags */}
+        <label className="block font-semibold mb-1">Tags</label>
+        <input
+          required
+          name="tags"
+          type="text"
+          className={`input input-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white placeholder-gray-300' : ''
+          }`}
+          placeholder="Tags (separate with commas)"
+        />
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Category</label>
-                <select name='category' defaultValue="Random" className="select w-full select-shadow font-semibold">
-                    <option value='Random' disabled={true}>Select Your Category</option>
-                    <option>Technology</option>
-                    <option>Science</option>
-                    <option>Sports</option>
-                    <option>Politics</option>
-                </select>
+        {/* Thumbnail */}
+        <label className="block font-semibold mb-1">Thumbnail URL</label>
+        <input
+          required
+          name="thumbnail"
+          type="text"
+          className={`input input-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white placeholder-gray-300' : ''
+          }`}
+          placeholder="Thumbnail image URL"
+        />
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Tags</label>
-                <input required name='tags' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give some tags (separate with commas ',' )" />
- 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Thumbnail image</label>
-                <input required name='thumbnail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} placeholder="Give your thumbnails URL" />
+        {/* Date */}
+        <label className="block font-semibold mb-1">Date</label>
+        <input
+          required
+          name="date"
+          type="date"
+          className={`input input-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white' : ''
+          }`}
+        />
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>Date</label>
-                <input required name='date' type="date" className="input w-full select-shadow font-semibold" placeholder="" />
+        {/* Author Info */}
+        <label className="block font-semibold mb-1">My Info</label>
+        <input
+          name="authorName"
+          type="text"
+          readOnly
+          value={user?.displayName}
+          className={`input input-bordered w-full mb-2 ${
+            darkMode ? 'bg-gray-700 text-white' : ''
+          }`}
+        />
+        <input
+          name="authorEmail"
+          type="text"
+          readOnly
+          value={user?.email}
+          className={`input input-bordered w-full mb-4 ${
+            darkMode ? 'bg-gray-700 text-white' : ''
+          }`}
+        />
+        <input
+          name="authorPhoto"
+          type="text"
+          value={user?.photoURL}
+          className="hidden"
+        />
 
-                <label className={`${darkMode?'text-white':''} font-bold textarea-md label`}>My Info</label>
-                <input name='authorName' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} value={user?.displayName} />
-                <input name='authorEmail' type="text" className={`${darkMode?'placeholder-white':''} input w-full input-shadow`} value={user?.email} />
-                <input name='authorPhoto' type="text" className="input w-full hidden" value={user?.photoURL} />
-
-                <button className="btn bg-violet-950 border-violet-800 text-white hover:bg-white hover:text-violet-900 mt-4 text-lg">Publish</button>
-            </div>
-        </form>
-    );
+        {/* Submit */}
+        <button
+          type="submit"
+          className="btn btn-primary w-full text-lg font-semibold"
+        >
+          Publish
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default PostArticle;

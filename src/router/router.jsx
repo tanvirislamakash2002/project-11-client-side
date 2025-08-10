@@ -17,6 +17,9 @@ import ErrorPage from "../pages/ErrorPage";
 import AnimatedOutlet from "../pages/Authentication/AnimatedOutlet";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Profile from "../pages/Profile";
+import Dashboard from "../pages/Dashboard";
 
 
 const router = createBrowserRouter([
@@ -44,37 +47,50 @@ const router = createBrowserRouter([
                 element: <ArticleDetails></ArticleDetails>
             },
             {
-                path: '/postArticle',
-                element: <PrivateRoute>
-                    <PostArticle></PostArticle>
-                </PrivateRoute>
-            },
-            {
-                path: '/myArticles/:email',
-                // loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/my-articles/${params.email}`,{
-                //     headers:{
-                //         Authorization:`Bearer ${localStorage.getItem('token')}`
-                //     }
-                // }),
-                hydrateFallbackElement: <Loading></Loading>,
-                element: <PrivateRoute>
-                    <MyArticles></MyArticles>
-                </PrivateRoute>
-            },
-            {
                 path: '/filter-by-category/:category',
                 loader: ({ params }) => axios(`${import.meta.env.VITE_API_URL}/filter-by-category/${params.category}`),
                 hydrateFallbackElement: <Loading></Loading>,
                 element: <ArticlesFilterByCategory></ArticlesFilterByCategory>
             },
             {
-                path:'/about-us',
-                element:<AboutUs></AboutUs>
+                path: '/about-us',
+                element: <AboutUs></AboutUs>
             },
             {
-                path:'/contact-us',
-                element:<ContactUs></ContactUs>
+                path: '/contact-us',
+                element: <ContactUs></ContactUs>
             }
+        ]
+    },
+    {
+        element: <DashboardLayout></DashboardLayout>,
+        path: '/dashboard',
+        children: [
+            {
+                path: '/dashboard/myArticles/:email',
+                hydrateFallbackElement: <Loading></Loading>,
+                element: <PrivateRoute>
+                    <MyArticles></MyArticles>
+                </PrivateRoute>
+            },
+            {
+                path: '/dashboard/postArticle',
+                element: <PrivateRoute>
+                    <PostArticle></PostArticle>
+                </PrivateRoute>
+            },
+            {
+                path: '/dashboard/profile',
+                element: <PrivateRoute>
+                    <Profile></Profile>
+                </PrivateRoute>
+            },
+            {
+                path: '/dashboard',
+                element: <PrivateRoute>
+                    <Dashboard></Dashboard>
+                </PrivateRoute>
+            },
         ]
     },
     {

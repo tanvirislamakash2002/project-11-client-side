@@ -14,15 +14,17 @@ const RootLayout = () => {
     // }
     return (
         <div>
-            <header className={user?'my-[76px]':'my-[65px]'}>
+            <header className={user?'':''}>
                 <Navbar></Navbar>
             </header>
 
-            <main className={`${darkMode?`bg-[#23262B]`:``} min-h-[calc(100vh-348px)]`}>
+            <main className={`${darkMode?`bg-[#23262B]`:``} min-h-[calc(100vh-272px)] pt-16`}>
                 {
                     navigation.state==='loading'?
                     <Loading></Loading>
-                    :<Outlet></Outlet>
+                    :
+                    <Outlet></Outlet>
+                    
                 }
                 <ToastContainer />
             </main>

@@ -1,140 +1,144 @@
-import React, { useEffect, useState } from 'react';
-// import { useLoaderData } from 'react-router';
-import MyArticleRow from '../components/MyArticleRow';
-import UpdateModal from '../components/UpdateModal';
-import useAuth from '../hooks/useAuth';
-import useAxiosSecure from '../hooks/useAxiosSecure';
+import React, { useEffect, useState } from "react";
+import MyArticleRow from "../components/MyArticleRow";
+import UpdateModal from "../components/UpdateModal";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { GrArticle } from "react-icons/gr";
+import { FaHeart } from "react-icons/fa";
 
 const MyArticles = () => {
-    // const { data } = useLoaderData()
-    const { user, darkMode } = useAuth()
-    const axiosSecure = useAxiosSecure()
+    const { user, darkMode } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
-    const [articles, setArticles] = useState([])
-    const [selectedArticle, setSelectedArticle] = useState({})
+    const [articles, setArticles] = useState([]);
+    const [selectedArticle, setSelectedArticle] = useState({});
 
     useEffect(() => {
         axiosSecure(`/my-articles/${user.email}`)
-            .then(data => {
-                setArticles(data?.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [axiosSecure, user])
-
+            .then((data) => setArticles(data?.data))
+            .catch((error) => console.error(error));
+    }, [axiosSecure, user]);
 
     const removeDataFromTable = (id) => {
-        const filterData = articles.filter(article => article._id !== id)
-        
-        setArticles(filterData)
-    }
+        setArticles((prev) => prev.filter((article) => article._id !== id));
+    };
+
     const handleEdit = (articleData) => {
-        setSelectedArticle(articleData)
-        document.getElementById('my_modal_3').showModal()
-
-    }
-
+        setSelectedArticle(articleData);
+        document.getElementById("my_modal_3").showModal();
+    };
 
     const handleRowUpdate = (updatedData) => {
+        setArticles((prev) =>
+            prev.map((article) =>
+                article._id === updatedData._id ? updatedData : article
+            )
+        );
+    };
 
-        setArticles(articles.map(article =>
-            article._id === updatedData._id ? updatedData : article
-        ))
-
-    }
-
-    // total likes count
-    const totalLikes = articles.reduce((sum, obj) => {
-        return sum + (obj.likedBy ? obj.likedBy.length : 0)
-    }, 0)
-
-
-
+    const totalLikes = articles.reduce(
+        (sum, obj) => sum + (obj.likedBy ? obj.likedBy.length : 0),
+        0
+    );
 
     return (
-        <div className='max-w-7xl w-11/12 mx-auto mt-4 pb-4'>
-            <div className="pt-4">
-                <div className={`${darkMode ? `text-white` : ``} stats shadow flex flex-row-reverse bg-violet-500/10`}>
-                    <div className="stat">
+        <div className="max-w-7xl mx-auto w-11/12 mt-6 pb-6">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <h1 className="text-3xl font-bold">My Articles</h1>
+                <p className="text-base-content/70">
+                    Manage, edit, and track the performance of your articles.
+                </p>
+            </div>
 
-                        <div className="hidden md:block  lg:text-xl font-semibold">Total Likes</div>
-                        <div className="stat-value flex items-center mt-4">
-                            <p>{totalLikes}</p>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                className="inline-block h-8 w-8 stroke-current text-pink-400"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                ></path>
-                            </svg>
-                        </div>
-
+            {/* Stats Section */}
+            <div
+                className={`mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 ${darkMode ? "text-white" : ""
+                    }`}
+            >
+                {/* Likes */}
+                <div className="bg-pink-500/10 p-6 rounded-xl shadow-md flex items-center gap-4">
+                    <div className="bg-pink-500 text-white p-3 rounded-lg">
+                        <FaHeart size={24} />
                     </div>
-
-                    <div className="stat">
-
-                        <div className="hidden md:block lg:text-xl font-semibold">The number of articles</div>
-                        <div className="stat-value flex items-center gap-2">
-                            <p>{articles?.length}</p>
-
-                            <GrArticle className='text-violet-500' />
-                        </div>
-
+                    <div>
+                        <p className="text-sm opacity-70">Total Likes</p>
+                        <p className="text-2xl font-bold">{totalLikes}</p>
                     </div>
+                </div>
 
-                    <div className="stat flex items-center">
-                        <div className="">
-                            <div className="avatar">
-                                <div className="w-26 rounded-xl">
-                                    <img src={user?.photoURL} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="">
-                            <div className="stat-value text-3xl">{user?.displayName}</div>
-                            <div className=" text-2xl">{user?.email}</div>
-                        </div>
+                {/* Articles Count */}
+                <div className="bg-violet-500/10 p-6 rounded-xl shadow-md flex items-center gap-4">
+                    <div className="bg-violet-500 text-white p-3 rounded-lg">
+                        <GrArticle size={24} />
+                    </div>
+                    <div>
+                        <p className="text-sm opacity-70">Total Articles</p>
+                        <p className="text-2xl font-bold">{articles?.length}</p>
+                    </div>
+                </div>
 
+                {/* User Info */}
+                <div className="bg-base-200 p-6 rounded-xl shadow-md flex items-center gap-4">
+                    <div className="avatar">
+                        <div className="w-16 h-16 rounded-xl overflow-hidden">
+                            <img src={user?.photoURL} alt="User" />
+                        </div>
+                    </div>
+                    <div className="flex flex-col overflow-hidden">
+                        <h2 className="text-xl font-bold truncate">{user?.displayName}</h2>
+                        <p className="text-gray-500 truncate">{user?.email}</p>
                     </div>
                 </div>
             </div>
 
-            <div className={`${darkMode ? 'text-white' : ''} overflow-x-auto rounded-box border border-base-content/5 bg-violet-700/10 mt-4`}>
-                <table className="table">
-                    {/* head */}
-                    <thead className={`${darkMode ? 'text-white' : ''}`}>
+            {/* Table Section */}
+            <div
+                className={`mt-8 overflow-x-auto rounded-xl border border-base-content/10 ${darkMode ? "bg-base-200" : "bg-white"
+                    } shadow-md`}
+            >
+                <table className="table table-zebra">
+                    <thead>
                         <tr>
-                            <th></th>
+                            <th>#</th>
                             <th>Title</th>
                             <th>Content</th>
-                            <th className='hidden lg:block'>Tags</th>
+                            <th className="hidden lg:table-cell">Tags</th>
                             <th>Category</th>
-                            <th className='hidden md:block'>Date</th>
-                            <th></th>
+                            <th className="hidden md:table-cell">Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* rows */}
-                        {
-                            articles.map((myData, index) =>
-                                <MyArticleRow key={myData._id} myData={myData} index={index} handleEdit={handleEdit} removeDataFromTable={removeDataFromTable}></MyArticleRow>
-                            )
-                        }
-
-
+                        {articles.length > 0 ? (
+                            articles.map((myData, index) => (
+                                <MyArticleRow
+                                    key={myData._id}
+                                    myData={myData}
+                                    index={index}
+                                    handleEdit={handleEdit}
+                                    removeDataFromTable={removeDataFromTable}
+                                />
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7" className="text-center py-6 opacity-60">
+                                    No articles found.
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
-                {selectedArticle && <UpdateModal selectedArticle={selectedArticle} setSelectedArticle={setSelectedArticle} handleRowUpdate={handleRowUpdate}></UpdateModal>}
             </div>
 
+            {/* Update Modal */}
+            {selectedArticle && (
+                <UpdateModal
+                    selectedArticle={selectedArticle}
+                    setSelectedArticle={setSelectedArticle}
+                    handleRowUpdate={handleRowUpdate}
+                />
+            )}
         </div>
     );
 };
