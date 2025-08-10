@@ -52,7 +52,7 @@ const PopularArticles = ({ allArticlesData }) => {
 
                 <div className="text-center mt-20">
                     <Link
-                        to="/popular-articles"
+                        to="/allArticles"
                         className="inline-flex items-center justify-center group"
                     >
                         <span className={`text-lg font-medium mr-3 ${darkMode ? 'text-primary hover:text-primary-focus' : 'text-primary hover:text-primary-focus'} transition-colors`}>
